@@ -1,0 +1,108 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Window implements ActionListener{
+
+	static private final String newline = "\n";
+
+	JButton selectMatrixButton, saveButton;
+    JTextArea log;
+    JFileChooser fc;
+    JPanel panel;
+	public void createWindow()
+	{
+		JFrame frame = new JFrame("Hill Cipher");
+		frame.setVisible(true);
+		frame.setSize(500,500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel label = new JLabel("Matrix");
+		label.setHorizontalAlignment(10);
+		label.setAlignmentY(30);
+		panel = new JPanel();
+		//frame.add(panel);
+		//panel.add(label);
+		
+		
+		
+		JButton button = new JButton("Select matrix file");
+		panel.add(button);
+		
+		
+
+	    
+		
+		log = new JTextArea(2,2);
+        log.setMargin(new Insets(5,5,5,5));
+        //log.setEditable(false);
+        JScrollPane logScrollPane = new JScrollPane(log);
+
+        //Create a file chooser
+        fc = new JFileChooser();
+        
+        selectMatrixButton = new JButton("Select matrix file");
+        ChooseFileAction chooseFileAction = new ChooseFileAction(selectMatrixButton, saveButton, log, fc, panel);
+        selectMatrixButton.addActionListener(chooseFileAction);
+        selectMatrixButton.setBounds(0, 0, 6, 3);
+		//Create the save button.  We use the image from the JLF
+		//Graphics Repository (but we extracted it from the jar).
+		saveButton = new JButton("Save a File...");
+		saveButton.addActionListener(chooseFileAction);
+		
+		//For layout purposes, put the buttons in a separate panel
+		JPanel buttonPanel = new JPanel(); //use FlowLayout
+		//buttonPanel.add(selectMatrixButton);
+		buttonPanel.add(saveButton);
+		
+		//Add the buttons and the log to this panel.
+		frame.add(selectMatrixButton);
+		//frame.add(logScrollPane, 1);
+		
+
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//Handle open button action.
+        if (e.getSource() == selectMatrixButton) {
+            int returnVal = fc.showOpenDialog(panel);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                //This is where a real application would open the file.
+                log.append("Opening: " + file.getName() + "." + newline);
+            } else {
+                log.append("Open command cancelled by user." + newline);
+            }
+            log.setCaretPosition(log.getDocument().getLength());
+
+        //Handle save button action.
+        } else if (e.getSource() == saveButton) {
+            int returnVal = fc.showSaveDialog(panel);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                //This is where a real application would save the file.
+                log.append("Saving: " + file.getName() + "." + newline);
+            } else {
+                log.append("Save command cancelled by user." + newline);
+            }
+            log.setCaretPosition(log.getDocument().getLength());
+        }
+
+		
+	}
+}

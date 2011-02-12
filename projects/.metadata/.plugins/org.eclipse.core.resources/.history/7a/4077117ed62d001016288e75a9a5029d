@@ -1,0 +1,25 @@
+package gui;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Window {
+
+	public void createWindow()
+	{
+		JFrame frame = new JFrame("Hill Cipher");
+		frame.setVisible(true);
+		frame.setSize(500,500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel label = new JLabel("Matrix");
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		panel.add(label);
+		
+		JButton button = new JButton("Select matrix file");
+		panel.add(button);
+	}
+}

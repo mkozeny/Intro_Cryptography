@@ -1,0 +1,90 @@
+package eukleidian;
+
+public class MatrixOperator {
+
+	private int n;
+	
+	
+	
+	public MatrixOperator(int n) {
+		super();
+		this.n = n;
+	}
+
+	public int[] multiplyMatrixes(int[][] m1, int[] m2)
+	{
+		int m1r=m1.length;
+		int m1s=m1[0].length;
+		int m2s=m2.length;
+		int [] d = new int[m1r];
+		for (int i = 0; i < m1r; i++) {
+			for (int j = 0; j < m2s; j++) {
+				d[i] = 0;
+				for (int k = 0; k < m1s; k++) {
+					d[i] = (d[i] + m1[i][k] * m2[k]) % n;
+				}
+			}
+		}
+		return d;
+	}
+
+	public int[][] inverseMatrix(int [][] m)
+	{
+		int[][] m1 = new int[m.length][m[0].length];
+		for(int i=0; i<m.length;i++)
+		{
+			for(int j=0; j< m[0].length; j++)
+			{
+				m1[i][j]=m[i][j];
+				if(i==j)
+					m1[i][j+m[0].length]=1;
+			}
+		}
+		for(int i=0; i<m1.length; i++)
+		{
+			int firstMul = m1[i][i];
+			for(int j=i+1; j<m1.length; j++)
+			{
+				int secondMul = m1[j][i];
+				for(int k=0; k<m1[0].length; k++)
+				{
+					m1[j][k] = (m1[j][k]*firstMul) % n;
+					m1[i][k] = (m1[i][k]*secondMul) % n;
+					m1[j][k] = (m1[j][k]-m1[i][k]) % n;
+				}
+				/*for(int k=0; k<m1[0].length; k++)
+					m1[j][k] = (m1[j][k]-m1[i][k]) % n;*/
+				
+			}
+		}
+		for(int i=m1.length-2; i>=0; i--)
+		{
+			int secondMul = m1[i][m1.length-1];
+			for(int j=m1[0].length-1; j>i; j--)
+			{
+				int firstMul = m1[j][m1.length-1];
+				for(int k=0; k<m1[0].length; k++)
+				{
+					m1[i][k] = (m1[i][k]*firstMul) % n;
+					m1[j][k] = (m1[j][k]*secondMul) % n;
+					m1[i][k] = (m1[i][k]-m1[j][k]) % n;
+				}
+				/*for(int k=0; k<m1[0].length; k++)
+					m1[i][k] = (m1[i][k]-m1[j][k]) % n;
+				System.out.println("i: "+i+", j: "+j);*/
+				
+			}
+		}
+		return m1;
+	}
+	
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+	
+	
+}

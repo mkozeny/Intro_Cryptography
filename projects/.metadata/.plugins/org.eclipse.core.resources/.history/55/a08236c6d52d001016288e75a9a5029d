@@ -1,0 +1,12 @@
+package gui;
+
+import javax.swing.JFrame;
+
+public class Window {
+
+	public void createWindow()
+	{
+		JFrame frame = new JFrame();
+		frame.setVisible(true);
+	}
+}

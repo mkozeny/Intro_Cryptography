@@ -1,0 +1,79 @@
+package main;
+
+import gui.Find;
+
+import javax.swing.UIManager;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		//Window w = new Window();
+		//w.createWindow();
+		java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(
+                                  "javax.swing.plaf.metal.MetalLookAndFeel");
+                                //  "com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                                //UIManager.getCrossPlatformLookAndFeelClassName());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                new Find().setVisible(true);
+            }
+        });
+		/*String fileName = args.length>0 ?args[0]:"input.txt";
+		String matrixFile = args.length>1 ?args[1]:"matrix.txt";
+		Integer n = args.length>2 ?Integer.parseInt(args[2]):26;
+		PositionCounterLetter.countPosition();
+		InputReader reader = new InputReader(PositionCounterLetter.countPosition());
+		List<int[]> blocks = reader.convertInputToPositions(fileName);
+		List<int[]> encryptedBlocks = new ArrayList<int[]>();
+		int[][] matrix = reader.readMatrix(matrixFile);
+		MatrixOperator operator = new MatrixOperator(n);
+		for(int i=0; i<blocks.size(); i++)
+		{
+			System.out.println("Plaintext block "+(i+1)+":");
+			blockMatrixOutput(blocks.get(i));
+		}
+		for(int i=0; i<blocks.size(); i++)
+		{
+			encryptedBlocks.add(operator.multiplyMatrixes(matrix, blocks.get(i)));
+			System.out.println("Encrypted block "+(i+1)+":");
+			blockMatrixOutput(encryptedBlocks.get(i));
+		}
+		System.out.println("Inverse matrix");
+		int[][] inverseMatrix = operator.inverseMatrix(matrix);
+		matrixOutput(inverseMatrix);
+		List<int[]> decryptedBlocks = new ArrayList<int[]>();
+		for(int i=0; i<encryptedBlocks.size(); i++)
+		{
+			decryptedBlocks.add(operator.multiplyMatrixes(inverseMatrix, encryptedBlocks.get(i)));
+			System.out.println("Decrypted block "+(i+1)+":");
+			blockMatrixOutput(decryptedBlocks.get(i));
+		}*/
+	}
+	
+	public static void blockMatrixOutput(int [] m)
+	{
+		for(int i=0; i<m.length; i++)
+			System.out.println(m[i]);
+		
+	}
+	
+	public static void matrixOutput(int [][] m)
+	{
+		for(int i=0; i<m.length; i++)
+		{
+			for(int j=0; j<m[0].length; j++)
+				System.out.print(m[i][j]+" ");
+			System.out.println();
+		}
+			
+		
+	}
+
+}

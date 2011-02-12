@@ -1,0 +1,14 @@
+package gui;
+
+import javax.swing.JFrame;
+
+public class Window {
+
+	public void createWindow()
+	{
+		JFrame frame = new JFrame("Hill Cipher");
+		frame.setVisible(true);
+		frame.setSize(200,200);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+}

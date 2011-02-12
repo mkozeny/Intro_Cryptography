@@ -1,0 +1,71 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Window {
+
+	public void createWindow()
+	{
+		JFrame frame = new JFrame("Hill Cipher");
+		frame.setVisible(true);
+		frame.setSize(500,500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel label = new JLabel("Matrix");
+		label.setHorizontalAlignment(10);
+		label.setAlignmentY(30);
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		panel.add(label);
+		
+		
+		
+		JButton button = new JButton("Select matrix file");
+		panel.add(button);
+		
+		JButton openButton, saveButton;
+	    JTextArea log;
+	    JFileChooser fc;
+
+	    
+		
+		log = new JTextArea(5,20);
+        log.setMargin(new Insets(5,5,5,5));
+        log.setEditable(false);
+        JScrollPane logScrollPane = new JScrollPane(log);
+
+        //Create a file chooser
+        fc = new JFileChooser();
+        
+        openButton = new JButton("Open a File...");
+        openButton.addActionListener(new ChooseFileAction());
+
+		//Create the save button.  We use the image from the JLF
+		//Graphics Repository (but we extracted it from the jar).
+		saveButton = new JButton("Save a File...");
+		saveButton.addActionListener(new ChooseFileAction());
+		
+		//For layout purposes, put the buttons in a separate panel
+		JPanel buttonPanel = new JPanel(); //use FlowLayout
+		buttonPanel.add(openButton);
+		buttonPanel.add(saveButton);
+		
+		//Add the buttons and the log to this panel.
+		panel.add(buttonPanel, BorderLayout.PAGE_START);
+		panel.add(logScrollPane, BorderLayout.CENTER);
+		panel.add(fc);
+
+		
+	}
+}

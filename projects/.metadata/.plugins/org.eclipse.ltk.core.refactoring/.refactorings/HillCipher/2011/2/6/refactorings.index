@@ -1,0 +1,23 @@
+1296536565733	Rename field 'leftSide'
+1296539431917	Rename type 'InverseFinder'
+1296539454222	Rename type 'ExtendedEuclid'
+1296545017567	Delete element
+1296545154831	Delete element
+1296545172506	Rename package 'applet'
+1296589926702	Rename field 'openButton'
+1296589966555	Rename field 'openButton'
+1296589981519	Rename local variable 'openButton'
+1296594605376	Rename local variable 'label'
+1296594624402	Rename local variable 'textField'
+1296594643919	Rename local variable 'findButton'
+1296596841832	Rename local variable 'textLabel'
+1296596873453	Rename local variable 'textFindButton'
+1296597055609	Rename local variable 'outputLabel'
+1296597092710	Rename local variable 'outputField'
+1296597106759	Rename local variable 'outputFindButton'
+1296604285035	Delete element
+1296705819396	Delete element
+1296705847679	Delete element
+1296705860581	Rename type 'Find'
+1296713753880	Delete element
+1296840748600	Rename resource 'matrix3.txt'

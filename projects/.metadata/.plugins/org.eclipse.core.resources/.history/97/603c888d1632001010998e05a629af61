@@ -1,0 +1,81 @@
+package eukleidian;
+
+
+public class AnotherInverseFinder {
+	
+	
+	
+	
+	
+	public Equation findInverse(int number, int n)
+	{
+		if(number<0)
+			number+=n;
+		
+		int k=1;
+		int leftOperand=0;
+		int l=1;
+		int rightOperand=0;
+		int remainder=0;
+		if(number>n)
+		{
+			rightOperand=number;
+			leftOperand=n;
+			k=-number/n;
+			remainder=number % n;
+		}
+		else
+		{
+			rightOperand=n;
+			leftOperand=number;
+			k=-n/number;
+			remainder=n % number;
+		}
+		
+		
+		Equation eq1 = new Equation(k,leftOperand,l,rightOperand,remainder,leftOperand);
+		
+		if(eq1.getRemainder()==0)
+			return eq1;
+		
+		remainder=eq1.getLeftOperand() % eq1.getRemainder();
+		leftOperand=eq1.getLeftOperand();
+		rightOperand=eq1.getRemainder();
+		l=-leftOperand/rightOperand;
+		k=1;
+		
+		k+=l*eq1.getK();
+		l*=eq1.getL();
+		
+		
+		Equation eq2 = new Equation(k,leftOperand,l,eq1.getRightOperand(),remainder, eq1.getRemainder());
+		
+		if(eq2.getRemainder()==0)
+			return eq1;
+		
+		
+		return doEuclideanRecursively(eq1, eq2);
+	}
+	
+	public Equation doEuclideanRecursively(Equation eq1, Equation eq2)
+	{
+		
+		int remainder=eq2.getRightOperand1() % eq2.getRemainder();
+		int leftOperand=eq2.getRightOperand1();
+		int rightOperand=eq2.getRemainder();
+		int l=-leftOperand/rightOperand;
+		int k=1;
+		k=k*eq1.getK()+l*eq2.getK();
+		l=1*eq1.getL()+l*eq2.getL();
+		leftOperand=eq1.getLeftOperand();
+		rightOperand=eq1.getRightOperand();
+		
+		Equation actual = new Equation(k, leftOperand, l, rightOperand, remainder, eq2.getRemainder());
+		eq1=eq2;
+		eq2=actual;
+		if(remainder!=0)
+			return doEuclideanRecursively(eq1, eq2);
+		return eq1;
+	}
+
+}

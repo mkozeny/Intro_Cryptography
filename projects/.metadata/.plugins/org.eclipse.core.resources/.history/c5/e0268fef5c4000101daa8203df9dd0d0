@@ -1,0 +1,86 @@
+package main;
+
+public class Field {
+
+	private int[] moduloPolynom={1,0,0,0,1,1,0,1,1};
+	
+	public int[] addPolynoms(int [] p1, int [] p2)
+	{
+		int [] result = new int[8];
+		for(int i = 0; i < p1.length; i++)
+		{
+			if(p1[i]!=p2[i])
+				result[i]=1;
+		}
+		return result;
+	}
+	public int[] multiplyPolynoms(int [] p1, int [] p2)
+	{
+		reverse(p1);
+		reverse(p2);
+		int [] result = new int[16];
+		int power=0;
+		for(int i = 0; i < p1.length; i++)
+		{
+			for(int j = 0; j < p2.length ; j++)
+			{
+				if(p1[i]==1 && p2[j]==1)
+				{
+					power = i+j;
+					if(result[power]==1)
+						result[power]=0;
+					else if(result[power]==0)
+						result[power]=1;
+				}
+			}
+		}
+		reverse(result);
+		return result;
+	}
+	public int[] dividePolynoms(int [] p1, int [] p2)
+	{
+		reverse(p1);
+		reverse(p2);
+		int [] p =copyPolynom(p1);
+		int [] helpPol = new int[p1.length];
+		int [] result = new int[16];
+		int power=0;
+		for(int i = p.length-1; i >= 0; i--)
+		{
+			for(int j = p2.length -1 ; j >= 0 ; j--)
+			{
+				if(p[i]==1 && p2[j]==1)
+				{
+					if(i>=j)
+					power = i-j;
+					for(int k = 0; k < p2.length; k++)
+					{
+						if(p2[k]==1)
+							helpPol[k+power]=1;
+					}
+					p=addPolynoms(p, helpPol);
+				}
+			}
+		}
+		reverse(result);
+		return result;
+	}
+	public static int[] copyPolynom(int[] p) {
+		  int polynom[] = new int[p.length];          
+		  for(int i = 0; i < p.length; i++)
+			  polynom[i]=p[i];
+		  return polynom;
+	}
+	public static void reverse(int[] p) {
+		  int left  = 0;          
+		  int right = p.length-1; 
+		  
+		  while (left < right) {
+		     int temp = p[left]; 
+		     p[left]  = p[right]; 
+		     p[right] = temp;
+		     left++;
+		     right--;
+		  }
+	}
+}

@@ -1,0 +1,35 @@
+package main;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int [] p1 ={0,1,0,1,0,1,1,1};
+		int [] p2 ={1,0,0,0,0,0,1,1};
+		Field field = new Field();
+		int [] result = field.addPolynoms(p1, p2);
+		System.out.println("Result of adding p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
+		result = field.multiplyPolynoms(p1, p2);
+		System.out.println("Result of multiplying p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
+		int [] p5 ={0,1,0,1,0,1,1,1};
+		int [] p6 ={1,0,0,0,0,0,1,1};
+		result = field.multiplyPolynoms(p5, p6);
+		System.out.println("Result of multiplying p1: "+printOutput(p5)+", and p2: "+printOutput(p6)+", is: "+printOutput(result));
+		int [] p3 ={0,1,0,0,1,0,1,1};
+		int [] p4 ={1,1,0,0,1,0,0,0};
+		DividingResult dividingResult = field.dividePolynoms(p3, p4);
+		System.out.println("Result of dividing p1: "+printOutput(p3)+", with p2: "+printOutput(p4)+", is: "+printOutput(dividingResult.getResult())
+				+", remainder: "+printOutput(dividingResult.getRemainder()));
+	}
+	public static String printOutput(int [] p)
+	{
+		String s="";
+		for(int i = 0; i < p.length; i++)
+			s+=p[i]+" ";
+		return s;
+	}
+}
+	

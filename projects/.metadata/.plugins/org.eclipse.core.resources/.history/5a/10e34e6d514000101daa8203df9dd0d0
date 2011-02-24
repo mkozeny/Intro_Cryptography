@@ -1,0 +1,6 @@
+package main;
+
+public class Field {
+
+	private int[] moduloPolynom={1,0,0,0,1,1,0,1,1};
+}

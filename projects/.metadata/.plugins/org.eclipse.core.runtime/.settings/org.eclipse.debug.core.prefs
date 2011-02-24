@@ -1,3 +1,3 @@
-#Fri Feb 04 16:22:27 CST 2011
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="m1[j][k]"/>\n<expression enabled\="true" text\="e.getSource() \=\= openButton"/>\n<expression enabled\="true" text\="reader.getPositions().size()"/>\n<expression enabled\="true" text\="m1[i][k]"/>\n<expression enabled\="true" text\="m1[j][k]"/>\n<expression enabled\="true" text\="firstMul"/>\n<expression enabled\="true" text\="secondMul"/>\n<expression enabled\="true" text\="helpRow[k]"/>\n<expression enabled\="true" text\="i"/>\n<expression enabled\="true" text\="j"/>\n<expression enabled\="true" text\="k"/>\n</watchExpressions>\n
+#Thu Feb 24 16:06:27 CST 2011
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="helpPol"/>\n<expression enabled\="true" text\="p1"/>\n<expression enabled\="true" text\="p"/>\n<expression enabled\="true" text\="p2"/>\n</watchExpressions>\n
 eclipse.preferences.version=1

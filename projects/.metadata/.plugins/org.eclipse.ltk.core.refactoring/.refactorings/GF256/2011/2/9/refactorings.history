@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;b&apos; in &apos;main.Field.reverse(...)&apos; to &apos;p&apos;&#x0A;- Original project: &apos;GF256&apos;&#x0A;- Original element: &apos;main.Field.reverse(int[]).b&apos;&#x0A;- Renamed element: &apos;b&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;b&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;main{Field.java[Field~reverse~\[I@b!678!684!684!684!\[I" name="p" references="true" stamp="1298580521963" version="1.0"/>
+</session>

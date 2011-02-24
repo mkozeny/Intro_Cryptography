@@ -1,0 +1,24 @@
+package main;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int [] p1 ={0,1,0,1,0,1,1,1};
+		int [] p2 ={1,0,0,0,0,0,1,1};
+		Field field = new Field();
+		int [] result = field.addPolynoms(p1, p2);
+		System.out.println("Result of adding p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
+	}
+	public static String printOutput(int [] p)
+	{
+		String s="";
+		for(int i = 0; i < p.length; i++)
+			s+=p[i]+" ";
+		return s;
+	}
+}
+	

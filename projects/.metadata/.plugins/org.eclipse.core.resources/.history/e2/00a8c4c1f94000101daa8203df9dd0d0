@@ -1,0 +1,155 @@
+package main;
+
+
+
+public class Field {
+
+	private int[] moduloPolynom={1,0,0,0,1,1,0,1,1};
+	
+	public int[] addPolynoms(int [] p1, int [] p2)
+	{
+		int length = p1.length>p2.length?p1.length:p2.length;
+		int [] result = new int[length];
+		for(int i = 0; i < length; i++)
+		{
+			if(i <= p1.length-1 && i <= p2.length-1 && p1[i]!=p2[i])
+				result[i]=1;
+			else if(i > p1.length-1)
+				result[i]=p2[i];
+			else if(i > p2.length-1)
+				result[i]=p1[i];
+		}
+		return result;
+	}
+	public int[] multiplyPolynoms(int [] p1, int [] p2)
+	{
+		reverse(p1);
+		reverse(p2);
+		int [] result = new int[16];
+		int power=0;
+		for(int i = 0; i < p1.length; i++)
+		{
+			for(int j = 0; j < p2.length ; j++)
+			{
+				if(p1[i]==1 && p2[j]==1)
+				{
+					power = i+j;
+					if(result[power]==1)
+						result[power]=0;
+					else if(result[power]==0)
+						result[power]=1;
+				}
+			}
+		}
+		reverse(result);
+		DividingResult dividingResult = dividePolynoms(result, this.moduloPolynom);
+		result = dividingResult.getRemainder();
+		return result;
+	}
+	public DividingResult dividePolynoms(int [] p1, int [] p2)
+	{
+		reverse(p1);
+		reverse(p2);
+		int [] p =copyPolynom(p1);
+		int [] result = new int[16];
+		int [] helpPol = null;
+		int power=0;
+		int i=0;
+		int j=0;
+		
+		i=theMostSignificantOccupiedPosition(p);
+		j=theMostSignificantOccupiedPosition(p2);
+		while(i>=j)
+		{
+			helpPol = new int[16];
+			power = i-j;
+			result[power]=1;
+			for(int k = 0; k < p2.length; k++)
+			{
+				if(p2[k]==1)
+					helpPol[k+power]=1;
+			}
+			p=addPolynoms(p, helpPol);
+			i=theMostSignificantOccupiedPosition(p);
+			j=theMostSignificantOccupiedPosition(p2);
+		}
+		reverse(p1);
+		reverse(p2);
+		//reverse(p);
+		//reverse(result);
+		return new DividingResult(result, p);
+	}
+	public static void doExtendedEucleid(int [] p1, int [] p2)
+	{
+		int [] k={0,0,0,0,0,0,0,1};
+		int [] leftOperand;
+		int [] l={0,0,0,0,0,0,0,1};
+		int [] rightOperand;
+		int [] remainder;
+		DividingResult dividingResult;
+		Field field = new Field();
+		
+		rightOperand=p1;
+		leftOperand=p2;
+		dividingResult = field.dividePolynoms(p1, p2);
+		k=dividingResult.getResult();
+		remainder=dividingResult.getRemainder();
+		
+		
+		
+		Equation eq1 = new Equation(k,leftOperand,l,rightOperand,remainder,leftOperand);
+		/*if remainder of first equation is zero, you have to return this equation and GCD is then leftOperand*/
+		/*if(eq1.getRemainder()==0)
+			return eq1;*/
+		
+		dividingResult = field.dividePolynoms(eq1.getLeftOperand(), eq1.getRemainder());
+		remainder=dividingResult.getRemainder();
+		leftOperand=eq1.getLeftOperand();
+		rightOperand=eq1.getRemainder();
+		dividingResult = field.dividePolynoms(eq1.getLeftOperand(), eq1.getRightOperand());
+		l=dividingResult.getResult();
+		k=new int[8];//tady musi byt 1!!
+		k[k.length-1]=1;
+		
+		k=field.addPolynoms(k, field.multiplyPolynoms(l, eq1.getK()));
+		l=field.multiplyPolynoms(l, eq1.getL());
+		
+		
+		
+		Equation eq2 = new Equation(k,leftOperand,l,eq1.getRightOperand(),remainder, eq1.getRemainder());
+		/*else if remainder of second equation is zero, you have to return first equation and GCD is then remainder
+		if(eq2.getRemainder()==0)
+			return eq1;*/
+	}
+	public static int theMostSignificantOccupiedPosition(int[] p)
+	{
+		int position=0;
+		for(int i = p.length-1; i >= 0; i--)
+		{
+			if(p[i]==1)
+			{
+			  position=i;
+			  break;
+			}
+		}
+		return position;
+	}
+	public static int[] copyPolynom(int[] p) {
+		  int polynom[] = new int[p.length];          
+		  for(int i = 0; i < p.length; i++)
+			  polynom[i]=p[i];
+		  return polynom;
+	}
+	public static void reverse(int[] p) {
+		  int left  = 0;          
+		  int right = p.length-1; 
+		  
+		  while (left < right) {
+		     int temp = p[left]; 
+		     p[left]  = p[right]; 
+		     p[right] = temp;
+		     left++;
+		     right--;
+		  }
+	}
+}

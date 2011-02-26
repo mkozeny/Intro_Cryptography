@@ -1,0 +1,66 @@
+package main;
+
+public class Equation {
+
+	private int [] k;
+	
+	public int[] getK() {
+		return k;
+	}
+
+	public void setK(int[] k) {
+		this.k = k;
+	}
+
+	public int[] getLeftOperand() {
+		return leftOperand;
+	}
+
+	public void setLeftOperand(int[] leftOperand) {
+		this.leftOperand = leftOperand;
+	}
+
+	public int[] getL() {
+		return l;
+	}
+
+	public void setL(int[] l) {
+		this.l = l;
+	}
+
+	public int[] getRightOperand() {
+		return rightOperand;
+	}
+
+	public void setRightOperand(int[] rightOperand) {
+		this.rightOperand = rightOperand;
+	}
+
+	public int[] getRemainder() {
+		return remainder;
+	}
+
+	public void setRemainder(int[] remainder) {
+		this.remainder = remainder;
+	}
+
+	public int[] getRightOperandPrev() {
+		return rightOperandPrev;
+	}
+
+	public void setRightOperandPrev(int[] rightOperandPrev) {
+		this.rightOperandPrev = rightOperandPrev;
+	}
+
+	private int [] leftOperand;
+	
+	private int [] l;
+	
+	private int [] rightOperand;
+	
+	private int [] remainder;
+	
+	private int [] rightOperandPrev;
+	
+	
+}

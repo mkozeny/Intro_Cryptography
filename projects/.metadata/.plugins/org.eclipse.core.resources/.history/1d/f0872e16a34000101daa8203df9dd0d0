@@ -1,0 +1,18 @@
+package main;
+
+public class Equation {
+
+	private int [] k;
+	
+	private int [] leftOperand;
+	
+	private int [] l;
+	
+	private int [] rightOperand;
+	
+	private int [] remainder;
+	
+	private int [] rightOperandPrev;
+	
+	
+}

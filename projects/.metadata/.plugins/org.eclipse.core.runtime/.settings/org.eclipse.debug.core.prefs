@@ -1,3 +1,3 @@
-#Thu Feb 24 16:06:27 CST 2011
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="helpPol"/>\n<expression enabled\="true" text\="p1"/>\n<expression enabled\="true" text\="p"/>\n<expression enabled\="true" text\="p2"/>\n</watchExpressions>\n
+#Fri Feb 25 23:03:57 CST 2011
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="helpPol"/>\n<expression enabled\="true" text\="p1"/>\n<expression enabled\="true" text\="p"/>\n<expression enabled\="true" text\="p2"/>\n<expression enabled\="true" text\="p[0]"/>\n</watchExpressions>\n
 eclipse.preferences.version=1

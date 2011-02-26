@@ -1,35 +1,48 @@
 package main;
 
+
 public class Main {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int [] p1 ={0,1,0,1,0,1,1,1};
-		int [] p2 ={1,0,0,0,0,0,1,1};
+		
+		String hex1="";
+		String hex2="";
+	    
 		Field field = new Field();
-		int [] result = field.addPolynoms(p1, p2);
-		System.out.println("Result of adding p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
-		result = field.multiplyPolynoms(p1, p2);
-		System.out.println("Result of multiplying p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
-		int [] p5 ={0,1,0,0,1,0,1,1};
-		int [] p6 ={1,1,0,0,1,0,0,0};
-		result = field.multiplyPolynoms(p5, p6);
-		System.out.println("Result of multiplying p1: "+printOutput(p5)+", and p2: "+printOutput(p6)+", is: "+printOutput(result));
-		int [] p3 ={0,0,0,0,1,0,1,1};
-		int [] p4 ={0,0,0,0,0,1,0,1};
-		DividingResult dividingResult = field.dividePolynoms(p3, p4);
-		System.out.println("Result of dividing p1: "+printOutput(p3)+", with p2: "+printOutput(p4)+", is: "+printOutput(dividingResult.getResult())
-				+", remainder: "+printOutput(dividingResult.getRemainder()));
+		
+		hex1="57";
+		hex2="83";
+		int [] result = field.addPolynoms(Field.hexToBinary(hex1), Field.hexToBinary(hex2));
+		System.out.println("Result of adding p1: "+hex1+", and p2: "+hex2+", is: "+Field.binaryToHex(result));
+		result = field.multiplyPolynoms(Field.hexToBinary(hex1), Field.hexToBinary(hex2));
+		System.out.println("Result of multiplying p1: "+hex1+", and p2: "+hex2+", is: "+Field.binaryToHex(result));
+		
+		hex1="4B";
+		hex2="C8";
+		result = field.multiplyPolynoms(Field.hexToBinary(hex1), Field.hexToBinary(hex2));
+		System.out.println("Result of multiplying p1: "+hex1+", and p2: "+hex2+", is: "+Field.binaryToHex(result));
+
+		hex1="0B";
+		hex2="05";
+		DividingResult dividingResult = field.dividePolynoms(Field.hexToBinary(hex1), Field.hexToBinary(hex2));
+		System.out.println("Result of dividing p1: "+hex1+", with p2: "+hex2+", is: "+Field.binaryToHex(dividingResult.getResult())
+				+", remainder: "+Field.binaryToHex(dividingResult.getRemainder()));
+		
+		hex1 = "7E";
+		Equation equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		int [] inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		
+		hex1 = "B2";
+		equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		
+		hex1 = "C6";
+		equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
 	}
-	public static String printOutput(int [] p)
-	{
-		String s="";
-		for(int i = 0; i < p.length; i++)
-			s+=p[i]+" ";
-		return s;
-	}
+	
 }
 	

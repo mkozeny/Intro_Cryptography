@@ -1,0 +1,113 @@
+package main;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		String hex1="";
+		String hex2="";
+	    
+		int [] p1 ={1,1,1,0,1,0,1,0};
+		int [] p2 ={1,1,0,0,0,0,0,1};
+		Field field = new Field();
+		int [] result = field.addPolynoms(p1, p2);
+		System.out.println("Result of adding p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
+		result = field.multiplyPolynoms(p1, p2);
+		Field.reverse(result);
+		Field.reverse(p1);
+		Field.reverse(p2);
+		System.out.println("Result of multiplying p1: "+printOutput(p1)+", and p2: "+printOutput(p2)+", is: "+printOutput(result));
+		Field.reverse(p1);
+		Field.reverse(p2);
+
+		int [] p5 ={1,1,0,1,0,0,1,0};
+		int [] p6 ={0,0,0,1,0,0,1,1};
+		result = field.multiplyPolynoms(p5, p6);
+		Field.reverse(result);
+		Field.reverse(p5);
+		Field.reverse(p6);
+		System.out.println("Result of multiplying p1: "+printOutput(p5)+", and p2: "+printOutput(p6)+", is: "+printOutput(result));
+		Field.reverse(p5);
+		Field.reverse(p6);
+
+		/*int [] p3 ={1,1,0,1,0,0,0,0};
+		int [] p4 ={1,0,1,0,0,0,0,0};
+		DividingResult dividingResult = field.dividePolynoms(p3, p4);
+		Field.reverse(dividingResult.getResult());
+		Field.reverse(dividingResult.getRemainder());
+		Field.reverse(p3);
+		Field.reverse(p4);
+		System.out.println("Result of dividing p1: "+printOutput(p3)+", with p2: "+printOutput(p4)+", is: "+printOutput(dividingResult.getResult())
+				+", remainder: "+printOutput(dividingResult.getRemainder()));
+		Field.reverse(p3);
+		Field.reverse(p4);*/
+		
+		hex1="0B";
+		hex2="05";
+		DividingResult dividingResult = field.dividePolynoms(Field.hexToBinary(hex1), Field.hexToBinary(hex2));
+		System.out.println("Result of dividing p1: "+hex1+", with p2: "+hex2+", is: "+Field.binaryToHex(dividingResult.getResult())
+				+", remainder: "+Field.binaryToHex(dividingResult.getRemainder()));
+		
+		/*int [] p7 ={0,1,1,1,1,1,1,0};
+		Equation equation = field.doExtendedEucleid(field.getModuloPolynom(),p7);
+		int [] inverse;
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		Field.reverse(inverse);
+		Field.reverse(p7);
+		System.out.println("Inverse of p1: "+printOutput(p7)+", is: "+printOutput(inverse));
+		Field.reverse(p7);
+		*/
+		/*int [] p8 ={0,1,0,0,1,1,0,1};
+		equation = field.doExtendedEucleid(field.getModuloPolynom(),p8);
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		//Field.reverse(inverse);
+		//Field.reverse(p8);
+		System.out.println("Inverse of p1: "+printOutput(p8)+", is: "+printOutput(inverse));
+		//Field.reverse(p8);
+*/		
+		//int [] p9 ={0,1,1,0,0,0,1,1};
+		/*equation = field.doExtendedEucleid(field.getModuloPolynom(),p9);
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		Field.reverse(inverse);
+		Field.reverse(p9);
+		System.out.println("Inverse of p1: "+printOutput(p9)+", is: "+printOutput(inverse));
+		Field.reverse(p9);*/
+		hex1 = "7E";
+		Equation equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		int [] inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		//Field.reverse(inverse);
+		//Field.reverse(p9);
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		
+		
+		hex1 = "B2";
+		equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		//Field.reverse(inverse);
+		//Field.reverse(p9);
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		
+		hex1 = "C6";
+		equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
+		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
+		//Field.reverse(inverse);
+		//Field.reverse(p9);
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		//Field.reverse(p9);
+		
+		//System.out.println(Field.binaryToHex(p9));
+		//System.out.println(printOutput(Field.hexToBinary("C6")));
+	}
+	public static String printOutput(int [] p)
+	{
+		String s="";
+		for(int i = 0; i < p.length; i++)
+			s+=p[i]+"";
+		return s;
+	}
+}
+	

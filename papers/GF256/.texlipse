@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Wed Mar 02 22:50:40 CST 2011
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=gf_256.tex
+outputFile=gf_256.pdf
+langSpell=en
+markDer=true
+srcDir=

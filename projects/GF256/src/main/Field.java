@@ -3,14 +3,18 @@ package main;
 
 public class Field {
 
-	private int[] moduloPolynom={1,1,0,1,1,0,0,0,1};
+	/*GF 256 polynom*/
+	private final int[] moduloPolynom={1,1,0,1,1,0,0,0,1};
 	
+	/*identity polynom*/
 	private int [] identity={1,0,0,0,0,0,0,0};
 	
+	/*this function adds two polynoms in GF 256 and result returns in array*/
 	public int[] addPolynoms(int [] p1, int [] p2)
 	{
 		int length = p1.length>p2.length?p1.length:p2.length;
 		int [] result = new int[length];
+		/*implemented as simple XOR, in Java array is initialized with zeros*/
 		for(int i = 0; i < length; i++)
 		{
 			if(i <= p1.length-1 && i <= p2.length-1 && p1[i]!=p2[i])
@@ -22,10 +26,12 @@ public class Field {
 		}
 		return result;
 	}
+	/*this function multiplies two polynoms in GF 256 and result returns in array*/
 	public int[] multiplyPolynoms(int [] p1, int [] p2)
 	{
 		int [] result = new int[theMostSignificantOccupiedPosition(p1)+theMostSignificantOccupiedPosition(p2)+2];
 		int power=0;
+		/*polynom is multiplied with another polynom and result is divided by modulo polynom*/
 		for(int i = 0; i < p1.length; i++)
 		{
 			for(int j = 0; j < p2.length ; j++)
@@ -44,6 +50,8 @@ public class Field {
 		result = dividingResult.getRemainder();
 		return result;
 	}
+	/*this function divides two polynoms in GF 256 and result returns in object DividingResult,
+	 * where in first field is result and in the second field is remainder*/
 	public DividingResult dividePolynoms(int [] p1, int [] p2)
 	{
 		int [] p =copyPolynom(p1);
@@ -55,9 +63,11 @@ public class Field {
 		
 		i=theMostSignificantOccupiedPosition(p);
 		j=theMostSignificantOccupiedPosition(p2);
+		/*while power of actual remainder is greater than divider and remainder is nonzero, continue*/
 		while(i>=j && (!isPolynomZero(p)))
 		{
 			helpPol = new int[theMostSignificantOccupiedPosition(p1)+theMostSignificantOccupiedPosition(p2)+2];
+			/*counts resulted power*/
 			power = i-j;
 			result[power]=1;
 			for(int k = 0; k < p2.length; k++)
@@ -65,12 +75,15 @@ public class Field {
 				if(p2[k]==1)
 					helpPol[k+power]=1;
 			}
+			/*counts actual remainder*/
 			p=addPolynoms(p, helpPol);
 			i=theMostSignificantOccupiedPosition(p);
 			j=theMostSignificantOccupiedPosition(p2);
 		}
 		return new DividingResult(result, p);
 	}
+	/*this function returns object Equation which is: remainder = k*leftOperand + l*rightOperand
+	 * as left operand is there used a smaller number*/
 	public Equation doExtendedEucleid(int [] p1, int [] p2)
 	{
 		int [] k=copyPolynom(identity);
@@ -86,6 +99,8 @@ public class Field {
 		remainder=dividingResult.getRemainder();
 		
 		Equation eq1 = new Equation(k,leftOperand,l,rightOperand,remainder,leftOperand);
+		/*if remainder of first equation is zero, you have to return this equation and GCD is then leftOperand
+		 * it is in GF 256 impossible, because every member of GF 256 has an inverse*/
 		if(isPolynomZero(eq1.getRemainder()))
 			return eq1;
 		
@@ -100,10 +115,16 @@ public class Field {
 		l=multiplyPolynoms(l, eq1.getL());
 		
 		Equation eq2 = new Equation(k,leftOperand,l,eq1.getRightOperand(),remainder, eq1.getRemainder());
+		/*else if remainder of second equation is zero, you have to return first equation and GCD is then remainder*/
 		if(isPolynomZero(eq2.getRemainder()))
 			return eq1;
 		return doEuclideanRecursively(eq1, eq2);
 	}
+	/*to count next recursion step, you have to remember from previous equation remainder and leftOperand (which is here described as rightOperand1)
+	 * and firstly is equation count in classic pattern k*leftOp = l*rightOp * remainder 
+	 * then is equation count in pattern remainder = k*p + l*q
+	 * and then recursion repeat until remainder is zero
+	 * this recursion is tail recursion*/
 	private Equation doEuclideanRecursively(Equation eq1, Equation eq2)
 	{
 		DividingResult dividingResult = dividePolynoms(eq2.getRightOperandPrev(), eq2.getRemainder());
@@ -126,6 +147,7 @@ public class Field {
 			return doEuclideanRecursively(eq1, eq2);
 		return eq1;
 	}
+	/*controls if the given polynom is zero*/
 	public static boolean isPolynomZero(int [] p)
 	{
 		for(int i = 0; i < p.length; i++)
@@ -135,6 +157,7 @@ public class Field {
 		}
 		return true;
 	}
+	/*controls if the given polynom is one*/
 	public static boolean isOne(int [] p)
 	{
 		if(p.length>0 && p[0]==1)
@@ -148,6 +171,7 @@ public class Field {
 		}
 		return false;
 	}
+	/*finds the most significant occupied position with one*/
 	public static int theMostSignificantOccupiedPosition(int[] p)
 	{
 		int position=0;
@@ -161,12 +185,14 @@ public class Field {
 		}
 		return position;
 	}
+	/*copy polynom*/
 	public static int[] copyPolynom(int[] p) {
 		  int polynom[] = new int[p.length];          
 		  for(int i = 0; i < p.length; i++)
 			  polynom[i]=p[i];
 		  return polynom;
 	}
+	/*reverses polynom*/
 	public static void reverse(int[] p) {
 		  int left  = 0;          
 		  int right = p.length-1; 
@@ -179,6 +205,7 @@ public class Field {
 		     right--;
 		  }
 	}
+	/*given hex string transforms to binary array*/
 	public static int[] hexToBinary(String hex)
 	{
 		int i = Integer.parseInt(hex,16);
@@ -191,6 +218,7 @@ public class Field {
 	    reverse(polynom);
 	    return polynom;
 	}
+	/*given binary array transforms to hex string*/
 	public static String binaryToHex(int [] p)
 	{
 		String binary = "";
@@ -201,7 +229,7 @@ public class Field {
 	    }
 		reverse(p);
 	    int i= Integer.parseInt(binary,2);
-	    return Integer.toHexString(i);
+	    return Integer.toHexString(i).toUpperCase();
 	}
 	public int[] getModuloPolynom() {
 		return moduloPolynom;

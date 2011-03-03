@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 package(s) to &apos;GF256/src&apos;&#x0A;- Original project: &apos;HillCipher&apos;&#x0A;- Destination element: &apos;GF256/src&apos;&#x0A;- Original element: &apos;HillCipher/src/gui&apos;" description="Copy package" destination="=GF256/src" element1="/src&lt;gui" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1299133882297" version="1.0"/>
+</session>

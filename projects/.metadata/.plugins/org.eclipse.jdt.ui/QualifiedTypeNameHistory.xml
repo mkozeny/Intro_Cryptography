@@ -5,4 +5,9 @@
 <fullyQualifiedTypeName name="eukleidian.Equation"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="main.DividingResult"/>
+<fullyQualifiedTypeName name="main.Field"/>
+<fullyQualifiedTypeName name="javax.xml.bind.annotation.adapters.HexBinaryAdapter"/>
+<fullyQualifiedTypeName name="main.Equation"/>
 </qualifiedTypeNameHistroy>

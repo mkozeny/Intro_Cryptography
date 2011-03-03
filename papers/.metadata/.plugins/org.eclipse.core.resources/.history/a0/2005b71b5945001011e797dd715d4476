@@ -1,0 +1,185 @@
+\title{GF 256} \author{
+        Martin Kozeny\\
+        MATH 4530: Intro Cryptography\\
+        Spring 2011
+        University of New Orleans
+}
+\date{\today}
+
+
+
+
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{qtree}
+\usepackage{multicol}
+%\usepackage{chemarrow}
+\usepackage[utf8]{inputenc}
+
+
+\setlength{\hoffset}{-2.3cm} 
+\setlength{\voffset}{-3cm}
+\setlength{\textheight}{24.0cm} 
+\setlength{\textwidth}{16cm}
+
+
+\begin{document}
+
+
+\maketitle
+
+\section{Adding}
+For adding, I tried to evaluate these examples with shown results:
+
+\begin{table}[ht]
+  \centering
+  \caption{Hardware configuration}
+  \begin{tabular}{|l|l|l|}
+  \hline
+  Name & Type & Data\\
+  \hline
+  \hline
+  
+  Capabilities & REG\_DWORD & 0x00000030 (48) \\
+  \hline
+HardwareID & REG\_MULTI\_SZ & ACPI/AuthenticAMD\_\ldots\\
+\hline
+& & *AuthenticAMD\_-\_x86\_Family\_15\_Model\_15 \\
+\hline
+&  & ACPI/AuthenticAMD\_-\_x86\_Family\_15 \\
+\hline
+& &  *AuthenticAMD\_-\_x86\_Family\_15 \\
+\hline 	
+& & ACPI/AuthenticAMD\_-\_x86 \\
+\hline 	
+& &	*AuthenticAMD\_-\_x86 \\
+\hline
+CompatibleIDs &	REG\_MULTI\_SZ & ACPI/Processor\\
+\hline
+ClassGUID &	REG\_SZ & \{50127DC3-0F36-415E-A6CC-4CB\ldots\\
+\hline
+Class &	REG\_SZ & Processor \\
+\hline
+Driver & REG\_SZ & \{50127DC3-0F36-415E-A6CC-4CB3\ldots\\
+\hline 	
+Mfg & REG\_SZ &	Advanced Micro Devices\\
+\hline 	
+Service & REG\_SZ & AmdK8\\
+\hline 	
+DeviceDesc & REG\_SZ & AMD Athlon 64 Processor\\
+\hline
+ConfigFlags & REG\_DWORD &  0x00000000 (0)\\
+\hline
+FriendlyName & REG\_SZ & AMD Athlon(tm) 64 Processor 3200+\\
+\hline  
+  
+  \end{tabular}
+  \label{tab:hwConfTab}
+\end{table}
+
+
+\section{Multiplying}
+For multiplying, I tried to evaluate these examples with shown results:
+
+
+
+\section{Finding inverses}
+For finding inverses, I tried to evaluate these examples with shown results:
+
+According to regular grammar presented in \cite{muller:programovaci_jazyky},
+page 15, we can write similar grammar for arithmetic operations $+$ and $-$,
+which will be ambiguous. Context-free grammar $G$ = (\{$E$\}, \{$a$, $+$, $-$\},
+\{ $E \rightarrow E + E | E - E | a$ \}, $E$), where $G$
+= ($N, T, R, S$) is set of $N$ = nonterminals, $T$ = terminals, $R$ = rules and
+$S$ = start symbol, is ambiguous. Let's take for example expression $27 - 4
++3$. We can write for this expression more than one derivation tree (trees (a)
+and (b)). In derivation tree (a) we get the result $20$ and in (b) $26$. For
+better readability, we will show rules in rows:\newline
+\begin{enumerate} 
+  \item $E \rightarrow E + E$
+  \item $E \rightarrow E - E$
+  \item $E \rightarrow a$ 
+\end{enumerate}
+
+%\Tree [.E [.E [.E a]+[.E a]]+[.E a]]
+
+%\Tree [.E [.E a ] + [.E [.E ]+ [.E ] ] ]
+\begin{multicols}{2}
+
+
+  
+	(a)\Tree [.E [.E {a}(27)  ].E - [.E [.E {a}(4) ]+ [.E {a}(3) ] ] ].E
+	
+  
+
+
+  
+	(b)\Tree [.E [.E [.E {a}(27) ]- [.E {a}(4) ]  ].E + [.E {a}(3) ] ].E
+\end{multicols}
+\section{Unambiguous grammar}
+Now we have to change rules in order to get unambiguous grammar. In other words
+we have to create grammar with left associativity. Due to this fact, we add new
+nonterminal symbol $T$ (term). This nonterminal symbol guarantees, that on the
+left side of parse tree will be nonterminal $E$ (expression), which has to be
+evaluated first in order to get the left operand. Whole grammar will looks that:
+$G$ = (\{$E$, $T$\}, \{$a$, $+$, $-$\}, \{ $E \rightarrow E + T | E - T | T$, $T
+\rightarrow T + a | T - a | a$ \}, $E$). Using this
+rules for same expression, we get by derivation tree (c) shown below
+result 26 because of keeping left associativity. Rules:\newline
+\begin{enumerate} 
+  \item $E \rightarrow E + T$
+  \item $E \rightarrow E - T$
+  \item $E \rightarrow T$
+  \item $T \rightarrow T + a$
+  \item $T \rightarrow T - a$ 
+  \item $T \rightarrow a$
+\end{enumerate}
+%\Tree [.E [ [ [a].T ].E+ [ a ].E  ].E + [ a ].E ].E
+%\Tree [.E [.E [.E a ]+ [.E a ]  ].E + [.E a ] ].E
+
+	%\Tree [.E  [[ a ].E + [.T a ]].E + [.T a ].T  ]
+	(c)\Tree [.E [[[{a}(27) ].T ].E - [{a}(4) ].T ].E + [ {a}(3) ].T ]
+\newline
+\newline
+\newline To add precedence of operations $*$ and $/$ before $+$ and $-$, we have
+to put this operations into grammar in such way, that operations $*$ and $/$ are
+evaluated always before $+$ and $-$ and towards operations $+$ and $-$ goes only
+result of operations $*$ and $/$ keeping left associativity. Let's take e.g.
+expression $27 - 4 + 2 * 5$. We change grammar to $G$ = (\{$E$, $T$\}, \{$a$,
+$+$, $-$, $*$, $/$\}, \{ $E \rightarrow E + T | E - T | T$, $T \rightarrow T * a | T / a | a$ \}, $E$) and for testing expression get right result $33$ from derivation tree (d).
+Rules:\newline
+\begin{enumerate} 
+  \item $E \rightarrow E + T$
+  \item $E \rightarrow E - T$
+  \item $E \rightarrow T$
+  \item $T \rightarrow T * a$
+  \item $T \rightarrow T / a$ 
+  \item $T \rightarrow a$
+\end{enumerate}
+
+
+(d)\Tree [.E [[[{a}(27) ].T ].E - [{a}(4) ].T ].E + [ [{a}(2) ].T *
+{a}(5) ].T ]
+\newline
+\newline
+\newline This context-free grammar is not LL1 grammar according to rules for LL1
+grammar in \cite{muller:programovaci_jazyky}, page 54. For LL1 grammar hold:
+right side of rule which is used for expansion of nonterminal symbol at the top
+of the stack is unambiguously determined on this nonterminal symbol and one
+ahead readed input symbol (terminal). From shown rules, we can see that this
+grammar contains right recursion, which has to be for LL1 grammar eliminated.
+
+\begin{thebibliography}{1}
+
+\bibitem{muller:programovaci_jazyky}
+Doc. Ing. Karel Müller, Csc; Czech Technical University in Prague, Faculty of
+Electrical Engeneering, Department of Computer Science; \textit{Programovací
+jazyky}, October 2001.
+
+\end{thebibliography}
+
+
+
+\end{document}

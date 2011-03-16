@@ -9,7 +9,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		String hex1="";
+		/*String hex1="";
 		String hex2="";
 	    
 		Field field = new Field();
@@ -108,7 +108,7 @@ public class Main {
 		hex1 = "4B";
 		equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(hex1));
 		inverse=Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK();
-		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));
+		System.out.println("Inverse of p1: "+hex1+", is: "+Field.binaryToHex(inverse));*/
 		
 		java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

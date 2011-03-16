@@ -29,12 +29,17 @@ public class Window extends JFrame implements ActionListener{
 	
     public Window() {
     	field = new Field();
-    	
+
         JLabel byte1Label = new JLabel("byte 1");
         byte1Field = new JTextField(15);
         
         JLabel byte2Label = new JLabel("byte 2");
         byte2Field = new JTextField(15);
+        
+        JLabel resultLabel = new JLabel("result");
+        
+        byte1Field.setInputVerifier(new StrictInputVerifier());
+        byte2Field.setInputVerifier(new StrictInputVerifier());
         
         addSubButton = new JButton("Add/sub");
         addSubButton.addActionListener(this);
@@ -45,7 +50,7 @@ public class Window extends JFrame implements ActionListener{
         inverseButton = new JButton("byte1^{-1}");
         inverseButton.addActionListener(this);
         
-        result = new JTextField(15);
+        result = new JTextField(2);
         result.setEditable(false);
         
         
@@ -91,6 +96,7 @@ public class Window extends JFrame implements ActionListener{
         
         JPanel resultPanel = new JPanel();
         controls.setLayout(new FlowLayout());
+        resultPanel.add(resultLabel);
         resultPanel.add(result);
         
         
@@ -102,17 +108,33 @@ public class Window extends JFrame implements ActionListener{
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+    private class StrictInputVerifier extends InputVerifier {
+        
+
+        public boolean verify(JComponent input) {
+            JTextField textField = (JTextField) input;
+            if (textField.getText().matches("[0-9a-fA-F]{1,2}")) {
+                return true;
+            } else {
+            	textField.setText("");
+                return false;
+            }
+        }
+    }
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==addSubButton)
+		if(e.getSource()==addSubButton && byte1Field.getText()!=null 
+				&& byte1Field.getText().length()>0 && byte2Field.getText()!=null && byte2Field.getText().length()>0)
 		{
 			result.setText(Field.binaryToHex(field.addPolynoms(Field.hexToBinary(byte1Field.getText()), Field.hexToBinary(byte2Field.getText()))));
 		}
-		else if(e.getSource()==multiplyButton)
+		else if(e.getSource()==multiplyButton && byte1Field.getText()!=null 
+				&& byte1Field.getText().length()>0 && byte2Field.getText()!=null && byte2Field.getText().length()>0)
 		{
 			result.setText(Field.binaryToHex(field.multiplyPolynoms(Field.hexToBinary(byte1Field.getText()), Field.hexToBinary(byte2Field.getText()))));
 		}
-		else if(e.getSource()==inverseButton)
+		else if(e.getSource()==inverseButton && byte1Field.getText()!=null 
+				&& byte1Field.getText().length()>0)
 		{
 			Equation equation = field.doExtendedEucleid(field.getModuloPolynom(),Field.hexToBinary(byte1Field.getText()));
 			result.setText(Field.binaryToHex(Field.isPolynomZero(equation.getRemainder())?equation.getLeftOperand():equation.getK()));
@@ -126,6 +148,10 @@ public class Window extends JFrame implements ActionListener{
 			String message="\u00a9 Martin Kozeny, University of New Orleans, 2011"
 			;
 			JOptionPane.showMessageDialog(this, message, "Credits", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else
+		{
+			result.setText("");
 		}
 	}
     

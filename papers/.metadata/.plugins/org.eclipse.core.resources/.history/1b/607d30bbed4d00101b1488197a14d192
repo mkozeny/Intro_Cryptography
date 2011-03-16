@@ -1,0 +1,199 @@
+\title{GF 256} \author{
+        Martin Kozeny\\
+        MATH 4530: Intro Cryptography\\
+        Spring 2011
+        University of New Orleans
+}
+\date{\today}
+
+
+
+
+\documentclass[5pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{qtree}
+\usepackage{multicol}
+%\usepackage{chemarrow}
+\usepackage[utf8]{inputenc}
+
+
+\setlength{\hoffset}{-2.3cm} 
+\setlength{\voffset}{-3cm}
+\setlength{\textheight}{24.0cm} 
+\setlength{\textwidth}{16cm}
+
+
+\begin{document}
+
+
+\maketitle
+
+\section{Implementation}
+Details of implementation are written in comments in attached source code.
+\textbf{Adding} is implemented as simple XOR, \textbf{multiplying} as
+multiplying members of first with members of second polynom divided by modulo
+polynom (dividing was used instead of rewriting rules, beacause it is also
+used in inverse finding). Algorithm of \textbf{inverse finding} is
+the same as in previous homework - Extended Euclidean Algorithm - , but in
+implementation are used polynoms instead of integers.
+
+\section{Testing}
+These tests were verified manually and also by \cite{gf256:web}.
+\subsection{Adding}
+For adding, I tried to evaluate these examples with shown results in
+table \ref{tab:adding}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Adding in GF 256}
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  Left operand & Right operand & Expected result & Result\\
+  \hline
+  \hline
+  
+  A1 & D7 & 76 & 76 \\
+  \hline
+57 & 83 & D4 & D4\\
+\hline
+4B & C8 & 83 & 83\\
+\hline
+B2 & E5 & 57 & 57 \\
+\hline
+F1 & 10 &  E1 & E1\\
+\hline 	
+D7 & 12 & C5 & C5 \\
+\hline 	
+07& B9 & BE &	BE\\
+\hline 	
+45& 2D & 68 &	68\\
+\hline 	
+CC& EE & 22 &	22\\
+\hline
+%neeext
+AB & CD & 66 & 66 \\
+\hline 	
+3F& 7B & 44 &	44\\
+\hline 	
+62& 33 & 51 &	51\\
+\hline 	
+0E& 9D & 93 &	93\\
+\hline
+
+
+  \end{tabular}
+  \label{tab:adding}
+\end{table}
+
+\newpage
+\subsection{Multiplying}
+For multiplying, I tried to evaluate these examples with shown results in
+table \ref{tab:multiplying}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Multiplying in GF 256}
+  \begin{tabular}{|l|l|l|l|}
+  \hline
+  Left operand & Right operand & Expected result & Result\\
+  \hline
+  \hline
+  
+  A1 & D7 & D0 & D0 \\
+  \hline
+57 & 83 & C1 & C1\\
+\hline
+4B & C8 & 89 & 89\\
+\hline
+B2 & E5 & 76 & 76 \\
+\hline
+F1 & 10 &  89 & 89\\
+\hline 	
+D7 & 12 & 6A & 6A \\
+\hline 	
+07& B9 & 2 &	2\\
+\hline 	
+45& 2D & 2C &	2C\\
+\hline 	
+CC& EE & A &	A\\
+\hline
+%neeext
+AB & CD & BB & BB \\
+\hline 	
+3F& 7B & 87 &	87\\
+\hline 	
+62& 33 & 28 &	28\\
+\hline 	
+0E& 9D & E7 &	E7\\
+\hline
+
+
+  \end{tabular}
+  \label{tab:multiplying}
+\end{table}
+
+
+
+\subsection{Finding inverses}
+For finding inverses, I tried to evaluate these examples with shown results in
+table \ref{tab:inverses}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Finding inverses in GF 256}
+  \begin{tabular}{|l|l|l|}
+  \hline
+  Operand &  Expected result & Result\\
+  \hline
+  \hline
+  
+  7E & 81 & 81 \\
+  \hline
+4B & 13 & 13\\
+\hline
+C6 & E4 & E4\\
+\hline
+B2 & 1F & 1F \\
+\hline
+F1 & 23 & 23\\
+\hline 	
+D7 & EA & EA \\
+\hline 	
+07& D1 &	D1\\
+\hline 	
+45&  31 &	31\\
+\hline 	
+CC&  1B &	1B\\
+\hline
+%neeext
+AB & 4A & 4A \\
+\hline 	
+3F& 19 & 19\\
+\hline 	
+62& AF &	AF\\
+\hline 	
+0E & E5 &	E5\\
+\hline
+
+
+  \end{tabular}
+  \label{tab:inverses}
+\end{table}
+
+
+\section{Conclusion}
+Provided tests show, that implemented algorithms work
+correctly.
+
+\begin{thebibliography}{1}
+
+\bibitem{gf256:web}
+GF256 calculator,\newline
+\verb|http://computing.unn.ac.uk/staff/cgmb3/teaching/cryptography/GF256Applet/GF256Applet.html|.
+
+\end{thebibliography}
+
+
+\end{document}

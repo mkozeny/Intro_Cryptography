@@ -30,7 +30,18 @@
 
 \maketitle
 
-\section{Adding}
+\section{Implementation}
+Details of implementation are written in comments in attached source code.
+\textbf{Adding} is implemented as simple XOR, \textbf{multiplying} as
+multiplying members of the first polynom with members of the second polynom
+divided by modulo polynom (dividing was used instead of rewriting rules, beacause it is also
+used in inverse finding). Algorithm of \textbf{inverse finding} is
+the same as in previous homework - Extended Euclidean Algorithm - , but in
+implementation are used polynoms instead of integers.
+
+\section{Testing}
+These tests were verified manually and also by \cite{gf256:web}.
+\subsection{Adding}
 For adding, I tried to evaluate these examples with shown results in
 table \ref{tab:adding}.
 
@@ -56,14 +67,28 @@ F1 & 10 &  E1 & E1\\
 D7 & 12 & C5 & C5 \\
 \hline 	
 07& B9 & BE &	BE\\
+\hline 	
+45& 2D & 68 &	68\\
+\hline 	
+CC& EE & 22 &	22\\
 \hline
+%neeext
+AB & CD & 66 & 66 \\
+\hline 	
+3F& 7B & 44 &	44\\
+\hline 	
+62& 33 & 51 &	51\\
+\hline 	
+0E& 9D & 93 &	93\\
+\hline
+
 
   \end{tabular}
   \label{tab:adding}
 \end{table}
 
-
-\section{Multiplying}
+\newpage
+\subsection{Multiplying}
 For multiplying, I tried to evaluate these examples with shown results in
 table \ref{tab:multiplying}.
 
@@ -89,15 +114,29 @@ F1 & 10 &  89 & 89\\
 D7 & 12 & 6A & 6A \\
 \hline 	
 07& B9 & 2 &	2\\
+\hline 	
+45& 2D & 2C &	2C\\
+\hline 	
+CC& EE & A &	A\\
 \hline
+%neeext
+AB & CD & BB & BB \\
+\hline 	
+3F& 7B & 87 &	87\\
+\hline 	
+62& 33 & 28 &	28\\
+\hline 	
+0E& 9D & E7 &	E7\\
+\hline
+
 
   \end{tabular}
   \label{tab:multiplying}
 \end{table}
 
 
-\newpage
-\section{Finding inverses}
+
+\subsection{Finding inverses}
 For finding inverses, I tried to evaluate these examples with shown results in
 table \ref{tab:inverses}.
 
@@ -112,7 +151,7 @@ table \ref{tab:inverses}.
   
   7E & 81 & 81 \\
   \hline
-4B & 4B & 13\\
+4B & 13 & 13\\
 \hline
 C6 & E4 & E4\\
 \hline
@@ -123,7 +162,21 @@ F1 & 23 & 23\\
 D7 & EA & EA \\
 \hline 	
 07& D1 &	D1\\
+\hline 	
+45&  31 &	31\\
+\hline 	
+CC&  1B &	1B\\
 \hline
+%neeext
+AB & 4A & 4A \\
+\hline 	
+3F& 19 & 19\\
+\hline 	
+62& AF &	AF\\
+\hline 	
+0E & E5 &	E5\\
+\hline
+
 
   \end{tabular}
   \label{tab:inverses}
@@ -131,8 +184,16 @@ D7 & EA & EA \\
 
 
 \section{Conclusion}
-In conclusion it appears from provided test, that implemented algorithm works
+Provided tests show, that implemented algorithms work
 correctly.
+
+\begin{thebibliography}{1}
+
+\bibitem{gf256:web}
+GF256 calculator,\newline
+\verb|http://computing.unn.ac.uk/staff/cgmb3/teaching/cryptography/GF256Applet/GF256Applet.html|.
+
+\end{thebibliography}
 
 
 \end{document}

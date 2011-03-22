@@ -34,21 +34,36 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="net.sourceforge.texlipse.TexEditor" name="gf_256.tex" partName="gf_256.tex" path="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/papers/GF256/gf_256.tex" title="gf_256.tex" tooltip="GF256/gf_256.tex" workbook="DefaultEditorWorkbook">
+<editor id="net.sourceforge.texlipse.TexEditor" name="gf_256.tex" partName="gf_256.tex" path="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/papers/GF256/gf_256.tex" title="gf_256.tex" tooltip="GF256/gf_256.tex" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/GF256/gf_256.tex"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="732" selectionTopPixel="295"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="732" selectionTopPixel="306"/>
 </editor>
 <editor id="net.sourceforge.texlipse.TexEditor" name="unambiguous_grammar.tex" partName="unambiguous_grammar.tex" title="unambiguous_grammar.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/unambiguousGrammar/unambiguous_grammar.tex" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/unambiguousGrammar/unambiguous_grammar.tex"/>
-<editorState selectionHorizontalPixel="0" selectionLength="265" selectionOffset="4124" selectionTopPixel="1651"/>
+<editorState selectionHorizontalPixel="0" selectionLength="554" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 <editor id="net.sourceforge.texlipse.TexEditor" name="a_hackers_registry.tex" partName="a_hackers_registry.tex" title="a_hackers_registry.tex" tooltip="/home/kozenym/Desktop/UNO/school/Introduction_to_Digital_Forensics/git/reports/hackersRegistry/a_hackers_registry.tex" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/kozenym/Desktop/UNO/school/Introduction_to_Digital_Forensics/git/reports/hackersRegistry/a_hackers_registry.tex"/>
 <editorState selectionHorizontalPixel="0" selectionLength="1058" selectionOffset="2387" selectionTopPixel="1989"/>
+</editor>
+<editor activePart="true" focus="true" id="net.sourceforge.texlipse.TexEditor" name="midterm.tex" partName="midterm.tex" path="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/papers/midterm/midterm.tex" title="midterm.tex" tooltip="midterm/midterm.tex" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/midterm/midterm.tex"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="840" selectionTopPixel="536"/>
+</editor>
+<editor id="net.sourceforge.texlipse.TexEditor" name="expression_evaluation.tex" partName="expression_evaluation.tex" title="expression_evaluation.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1145"/>
+</editor>
+<editor id="net.sourceforge.texlipse.TexEditor" name="binding_homework.tex" partName="binding_homework.tex" title="binding_homework.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/bindingHomework/binding_homework.tex" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/bindingHomework/binding_homework.tex"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1130"/>
 </editor>
 </editors>
 <views>
@@ -79,7 +94,7 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (3 items)"/>
+<category IMemento.internal.id="Warnings (5 items)"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="73" org.eclipse.ui.ide.markerType="571" org.eclipse.ui.ide.pathField="143" org.eclipse.ui.ide.resourceField="108" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -301,6 +316,10 @@
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/unambiguousGrammar/unambiguous_grammar.tex"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Introduction_to_Digital_Forensics/git/reports/hackersRegistry/a_hackers_registry.tex"/>
 <editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/unambiguousGrammar/unambiguous_grammar.tex"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" path="/midterm/midterm.tex"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/unambiguousGrammar/unambiguous_grammar.tex"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex"/>
+<editor factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/bindingHomework/binding_homework.tex"/>
 </editors>
 <item historyLabel="gf_256.tex" index="0">
 <position info="not_deleted" x="0" y="2263"/>
@@ -326,8 +345,95 @@
 <item historyLabel="unambiguous_grammar.tex" index="3">
 <position info="not_deleted" x="4124" y="265"/>
 </item>
-<item active="true" historyLabel="gf_256.tex" index="0">
+<item historyLabel="gf_256.tex" index="0">
 <position info="not_deleted" x="1102" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="0" y="518"/>
+</item>
+<item historyLabel="unambiguous_grammar.tex" index="5">
+<position info="not_deleted" x="0" y="554"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position/>
+</item>
+<item historyLabel="expression_evaluation.tex" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="binding_homework.tex" index="7">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="1076" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="1664" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="2409" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="2923" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3415" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3427" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3505" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3482" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3606" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3707" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3922" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="3978" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4040" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4061" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4142" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4244" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4412" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4527" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4579" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4633" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4699" y="0"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4797" y="33"/>
+</item>
+<item historyLabel="midterm.tex" index="4">
+<position info="not_deleted" x="4837" y="0"/>
+</item>
+<item active="true" historyLabel="midterm.tex" index="4">
+<position/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -346,6 +452,18 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="midterm.pdf" tooltip="midterm/midterm.pdf">
+<persistable path="/midterm/midterm.pdf"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" name="binding_homework.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/bindingHomework/binding_homework.tex">
+<persistable uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/bindingHomework/binding_homework.tex"/>
+</file>
+<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" name="expression_evaluation.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex">
+<persistable uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="net.sourceforge.texlipse.TexEditor" name="midterm.tex" tooltip="midterm/midterm.tex">
+<persistable path="/midterm/midterm.tex"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="gf_256.pdf" tooltip="GF256/gf_256.pdf">
 <persistable path="/GF256/gf_256.pdf"/>
 </file>

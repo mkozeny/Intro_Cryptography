@@ -1,0 +1,123 @@
+
+
+\title{HW1 - Hill Cipher 2x2}
+\author{
+        David Kalivoda, Martin Kozeny\\
+	email: dkalivod@uno.edu, mkozeny@uno.edu\\
+    CSCI 4130: Intro Cryptography  \\
+University of New Orleans\\
+}
+\date{\today}
+
+\documentclass[11pt,letterpaper,oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%
+\usepackage{cmap}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\graphicspath{/img/}
+
+\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png}
+
+
+\usepackage{geometry}
+\geometry{
+  body={6.5in, 9.0in},
+  left=1.5in,
+  right =1.5in,
+  top=1.5in,
+bottom=1in
+}
+
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%This is the paper's abstract \ldots
+%\end{abstract}
+
+\section{Presenting the structure of program}
+The program consists of 6 Java classes.
+Program starts in {\bf Main.java} main function, where is encrypting and decrypting part. This main function just starts either  \verb+HillCipher.encrypt()+ or  \verb+HillCipher.decrypt()+ function with parameters which are needed. To be able to check proper functionality of the program, 
+I implemented the decryption part to use the cipher text previously encrypted as input. Then we can compare results.
+ {\bf Matrix} class encapsulates the operations with matrices as multiplying and finding invers matrix, for which it uses the {\bf Euclidean} class. Here are the Euclidean and extended Euclidean algorithm implemented.
+Classes {\bf Container} and {\bf InversDoesNotExistsException} are only additional classes which allow neat implementation of the program.\\
+More details about implementation can be seen in comments in the code.
+
+\section{Examples}
+ \begin{verbatim}
+Zn:	33
+plain text:	12 23 13 5 1 6 17 8 31 11 
+key:
+4 2 
+3 5 
+cipher text:	28 19 29 31 16 0 18 25 14 16 
+inverse key:
+31 14 
+21 5 
+decrypted text:	12 23 13 5 1 6 17 8 31 11 
+---------------------------------------------------------------------------
+Zn:	33
+plain text:	12 23 13 5 1 6 17 8 31 11 32 
+key:
+4 2 
+30 3 
+cipher text:	28 0 29 9 16 15 18 6 14 6 29 3 
+hillcipher.InversDoesNotExistException: -15 does not have inverse in 33
+Cipher text cannot be decrypted, because key matrix does not have inverse.
+---------------------------------------------------------------------------
+Zn:	11
+plain text:	1 2 3 4 5 6 7 8 9 10 
+key:
+4 2 
+3 5 
+cipher text:	8 2 9 7 10 1 0 6 1 0 
+inverse key:
+9 3 
+10 5 
+decrypted text:	1 2 3 4 5 6 7 8 9 10 
+---------------------------------------------------------------------------
+Zn:	111
+plain text:	16 28 99 47 50 68 73 84 90 110 51 1 29 45 81 
+key:
+4 2 
+3 5 
+cipher text:	9 77 46 88 3 46 16 84 25 43 95 47 95 90 102 21 
+inverse key:
+40 95 
+87 32 
+decrypted text:	16 28 99 47 50 68 73 84 90 110 51 1 29 45 81 0 
+---------------------------------------------------------------------------
+Zn:	111
+plain text:	16 28 99 47 50 68 73 84 90 110 51 1 29 45 81 
+key:
+110 24 
+13 51 
+cipher text:	101 82 30 21 28 11 56 16 108 9 84 48 52 8 30 54 
+hillcipher.InversDoesNotExistException: 81 does not have inverse in 111
+Cipher text cannot be decrypted, because key matrix does not have inverse.
+---------------------------------------------------------------------------
+Zn:	151
+plain text:	62 28 49 17 2 6 8 84 93 10 59 11 2 46 89 9 
+key:
+111 42 
+31 55 
+cipher text:	55 140 113 38 21 90 37 36 22 111 65 18 40 25 140 83 
+inverse key:
+71 116 
+100 17 
+decrypted text:	62 28 49 17 2 6 8 84 93 10 59 11 2 46 89 9 
+---------------------------------------------------------------------------
+Zn:	150
+plain text:	62 28 49 17 2 6 8 84 93 10 59 11 2 46 89 9 
+key:
+111 42 
+31 55 
+cipher text:	108 12 3 54 24 92 66 68 93 133 111 34 54 42 57 104 
+hillcipher.InversDoesNotExistException: 3 does not have inverse in 150
+Cipher text cannot be decrypted, because key matrix does not have inverse.
+  \end{verbatim}
+\end{document}

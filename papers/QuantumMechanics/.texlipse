@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Thu Apr 14 23:00:51 CDT 2011
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=quantum_mechanics.tex
+outputFile=quantum_mechanics.pdf
+langSpell=en
+markDer=true
+srcDir=

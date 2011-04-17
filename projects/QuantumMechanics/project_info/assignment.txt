@@ -1,0 +1,18 @@
+(1) Programming Option:
+Create a program which accepts as input a state |s> in C^2 and a standard measurement
+M=(|m^(1)>,|m^(2)>).  It should then:
+(i) Verify that |s> is a unit vector in C^2 (and output error if it is not)
+(ii) Verify that M is an orthonormal basis for C^2 (and output error if it is not)
+and (iii) Return the two probabilities P_1 and p_2 that the measurement with input
+state |s> has output state |m^(1)> and |m^2>, respectively.
+Warning:  You might have to create a fudge factor to allow for rounding errors when
+determining, for example, if a number equals 1 or if a number is nonzero.
+Now run the program on the inputs:
+(a) |s>=(1/sqrt{2})(i,1); |m^(1)> = (0,1); |m^2> = (0,1).
+and
+(b) |s>=(1/sqrt{2})(1,-i); |m^(1)> = (cos 2,sin 2); |m^2> = (-sin 2,cos 2).
+where the above trig functions are in radian mode.  That is, the 2 is in radians.
+
+
+
+(2) Proof Option: Do problem 2 on page 70 and problems 3,4,5 6 on pages 76-77.

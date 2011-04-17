@@ -1,0 +1,15 @@
+package main;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Complex c1 = new Complex(0, 1/Math.sqrt(2.0));
+		Complex c2 = new Complex(1/Math.sqrt(2.0), 0);
+		System.out.println("Length of vector: "+c1.length());
+		System.out.println("Is unit vector: "+c1.isUnitLength());
+	}
+
+}

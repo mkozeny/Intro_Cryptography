@@ -1,0 +1,58 @@
+package main;
+
+public class Vector {
+
+	private Complex c1;
+	
+	private Complex c2;
+
+	
+	
+	public Vector() {
+		super();
+	}
+
+	public Vector(Complex c1, Complex c2) {
+		super();
+		this.c1 = c1;
+		this.c2 = c2;
+	}
+
+	public double innerProduct(Vector operand)
+	{
+		Complex temp = new Complex(this.c1.getRe()*operand.getC1().getRe()+this.c1.getIm()*operand.getC1().getIm()
+				+this.c2.getRe()*operand.getC2().getRe()+this.c2.getRe()*operand.getC2().getRe()+this.c2.getIm()*operand.getC2().getIm(), 
+				-operand.getC1().getIm()*this.c1.getRe()+this.c1.getIm()*operand.getC1().getRe()-operand.getC2().getIm()*this.c2.getRe()
+				+this.c2.getIm()*operand.getC2().getRe());
+		return c1.getRe()*c1.getRe() + c1.getIm()*c1.getIm() + c2.getRe()*c2.getRe() + c2.getIm()*c2.getIm();
+	}
+	
+	public double length()
+	{
+		double scale = c1.getRe()*c1.getRe() + c1.getIm()*c1.getIm() + c2.getRe()*c2.getRe() + c2.getIm()*c2.getIm();
+        return scale / scale;
+	}
+
+	public boolean isUnitVector()
+	{
+		return this.length() == 1.0;
+	}
+	
+	public Complex getC1() {
+		return c1;
+	}
+
+	public void setC1(Complex c1) {
+		this.c1 = c1;
+	}
+
+	public Complex getC2() {
+		return c2;
+	}
+
+	public void setC2(Complex c2) {
+		this.c2 = c2;
+	}
+	
+	
+}

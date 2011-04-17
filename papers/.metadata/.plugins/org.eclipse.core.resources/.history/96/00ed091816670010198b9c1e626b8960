@@ -1,0 +1,135 @@
+
+
+\title{HW1 - Hill Cipher 2x2}
+\author{
+        David Kalivoda, Martin Kozeny\\
+	email: dkalivod@uno.edu, mkozeny@uno.edu\\
+    CSCI 4130: Intro Cryptography  \\
+University of New Orleans\\
+}
+\date{\today}
+
+\documentclass[11pt,letterpaper,oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%
+\usepackage{cmap}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\graphicspath{/img/}
+
+\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png}
+
+
+\usepackage{geometry}
+\geometry{
+  body={6.5in, 9.0in},
+  left=1.5in,
+  right =1.5in,
+  top=1.5in,
+bottom=1in
+}
+
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%This is the paper's abstract \ldots
+%\end{abstract}
+
+\section{Presenting the structure of program}
+The program consists of 3 Java classes.
+Program starts in {\bf Main.java} main function, where is described assignment
+and computed results for every example. In this class are called methods from
+class {\bf Vector} where all computations methods (\verb|isOrthonormal()|,
+\verb|innerProduct()|, \ldots) are implemented.
+
+
+
+This main function just starts either 
+\verb+HillCipher.encrypt()+ or \verb+HillCipher.decrypt()+ function with parameters which are needed. To be able to check proper functionality of the program, I implemented the decryption part to use the cipher text previously encrypted as input. Then we can compare results. {\bf Matrix} class encapsulates the operations with matrices as multiplying and finding invers matrix, for which it uses the {\bf Euclidean} class. Here are the Euclidean and extended Euclidean algorithm implemented.
+Classes {\bf Container} and {\bf InversDoesNotExistsException} are only additional classes which allow neat implementation of the program.\\
+More details about implementation can be seen in comments in the code.
+
+\section{Examples}
+ \begin{verbatim}
+ASSIGNMENT:
+|s>=(1/sqrt{2})(i,1)
+|m^(1)> = (0,1); |m^(2)> = (0,1)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: false
+We do not calculate probabilities.
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=(1/sqrt{2})(1,-i)
+|m^(1)> = (cos 2,sin 2); |m^(2)> = (-sin 2,cos 2)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+Probability of |m^(1)> outcome: 0.5
+Probability of |m^(2)> outcome: 0.5
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=(1/sqrt{2})(1,-i)
+|m^{1}> = (cos 2,sin 2); |m^(2)> = (-sin 2,cos 2)
+
+RESULTS:
+|s> is unit vector: false
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+We do not calculate probabilities.
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=(1/sqrt{2})(1+i,0)
+|m^{1}> = (1/sqrt{2})(1,i); |m^(2)> = (1/sqrt{2})(1,-i)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+Probability of |m^(1)> outcome: 0.5
+Probability of |m^(2)> outcome: 0.5
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=1/sqrt{2})(1,i)
+|m^{1}> = (1/sqrt{2})(1,i); |m^(2)> = (1/sqrt{2})(1,-i)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+Probability of |m^(1)> outcome: 1.0
+Probability of |m^(2)> outcome: 0.0
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=(sqrt{3}/2,i/2)
+|m^{1}> = (1/sqrt{2})(1,i); |m^(2)> = (1/sqrt{2})(1,-i)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+Probability of |m^(1)> outcome: 0.933012701892219
+Probability of |m^(2)> outcome: 0.066987298107781
+-------------------------------------------------------------
+
+ASSIGNMENT:
+|s>=(sqrt{3}/2,i/2)
+|m^{1}> = (1/sqrt{2})(1,i); |m^(2)> = (1/sqrt{2})(1,-i)
+
+RESULTS:
+|s> is unit vector: true
+Are vectors |m^(1)>; |m^(2)> orthonormal: true
+Probability of |m^(1)> outcome: 0.625
+Probability of |m^(2)> outcome: 0.375
+-------------------------------------------------------------
+
+
+  \end{verbatim}
+\end{document}

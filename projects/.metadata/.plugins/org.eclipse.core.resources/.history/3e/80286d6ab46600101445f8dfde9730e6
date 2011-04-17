@@ -1,0 +1,76 @@
+package main;
+
+public class Complex {
+
+	private double re;
+
+	private double im;
+
+	public Complex() {
+		super();
+	}
+
+	public Complex(double re, double im) {
+		super();
+		this.re = re;
+		this.im = im;
+	}
+
+	public double getRe() {
+		return re;
+	}
+
+	public double abs() {
+		return Math.hypot(re, im);
+	}
+
+	public Complex plus(Complex operand) {
+		return new Complex(this.re + operand.getRe(), this.im + operand.getIm());
+	}
+
+	public Complex minus(Complex operand) {
+		return new Complex(this.re - operand.getRe(), this.im - operand.getIm());
+	}
+
+	public Complex times(Complex operand) {
+		return new Complex(this.re * operand.getRe() - this.im
+				* operand.getIm(), this.re * operand.getIm() + this.im
+				* operand.getRe());
+	}
+
+	public Complex times(double operand) {
+		return new Complex(operand * re, operand * im);
+	}
+
+	public Complex conjugate() {
+		return new Complex(re, -im);
+	}
+
+	public double phase() {
+		return Math.atan2(im, re);
+	}
+
+	public void setRe(double re) {
+		this.re = re;
+	}
+	
+	public double length()
+	{
+		double scale = re*re + im*im;
+        return scale / scale;
+	}
+
+	public boolean isUnitLength()
+	{
+		return this.length() == 1.0;
+	}
+	
+	public double getIm() {
+		return im;
+	}
+
+	public void setIm(double im) {
+		this.im = im;
+	}
+
+}

@@ -55,7 +55,7 @@
 </editor>
 <editor activePart="true" focus="true" id="net.sourceforge.texlipse.TexEditor" name="midterm.tex" partName="midterm.tex" path="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/papers/midterm/midterm.tex" title="midterm.tex" tooltip="midterm/midterm.tex" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/midterm/midterm.tex"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="840" selectionTopPixel="536"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2307" selectionTopPixel="1018"/>
 </editor>
 <editor id="net.sourceforge.texlipse.TexEditor" name="expression_evaluation.tex" partName="expression_evaluation.tex" title="expression_evaluation.tex" tooltip="/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" uri="file:/home/kozenym/Desktop/UNO/school/Programming_Language_Structure/git/papers/expressionEvaluation/expression_evaluation.tex"/>

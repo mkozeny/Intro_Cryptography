@@ -1,0 +1,13 @@
+package main;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Complex c = new Complex(1/Math.sqrt(2.0), 1/Math.sqrt(2.0));
+		System.out.println("Length of vector: "+c.length());
+	}
+
+}

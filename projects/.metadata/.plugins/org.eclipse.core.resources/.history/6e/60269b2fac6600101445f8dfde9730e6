@@ -1,0 +1,29 @@
+package main;
+
+public class Complex {
+
+	private double re;
+	
+	private double im;
+
+	public double getRe() {
+		return re;
+	}
+	
+	public double abs()   { return Math.hypot(re, im); }
+    public double phase() { return Math.atan2(im, re); }
+
+	public void setRe(double re) {
+		this.re = re;
+	}
+
+	public double getIm() {
+		return im;
+	}
+
+	public void setIm(double im) {
+		this.im = im;
+	}
+	
+	
+}

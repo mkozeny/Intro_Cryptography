@@ -1,0 +1,88 @@
+package main;
+
+public class Vector {
+
+	private Complex c1;
+	
+	private Complex c2;
+
+	public Vector() {
+		super();
+	}
+
+	public Vector(Complex c1, Complex c2) {
+		super();
+		this.c1 = c1;
+		this.c2 = c2;
+	}
+	
+	/*
+	 * returns whether vectors are orhonormal
+	 * checks length of both vectors
+	 * and their inner product
+	 */
+	public boolean isOrthonormal(Vector operand)
+	{
+		return isZeroInnerProduct(operand) && this.isUnitVector() && operand.isUnitVector();
+	}
+	
+	/*
+	 * checks whether inner product equals zero
+	 */
+	public boolean isZeroInnerProduct(Vector operand)
+	{
+		return innerProduct(operand).isZero();
+	}
+	
+	public double probabilityOfOutcome(Vector operand)
+	{
+		return round(this.innerProduct(operand).timesItself(),15);
+		
+	}
+
+	public Complex innerProduct(Vector operand)
+	{
+		return new Complex(round(this.c1.getRe()*operand.getC1().getRe()+this.c1.getIm()*operand.getC1().getIm()
+				+this.c2.getRe()*operand.getC2().getRe()+this.c2.getIm()*operand.getC2().getIm(),15), 
+				round(-operand.getC1().getIm()*this.c1.getRe()+this.c1.getIm()*operand.getC1().getRe()-operand.getC2().getIm()*this.c2.getRe()
+				+this.c2.getIm()*operand.getC2().getRe(),15));
+	}
+	
+	public double length()
+	{
+		double scale = c1.getRe()*c1.getRe() + c1.getIm()*c1.getIm() + c2.getRe()*c2.getRe() + c2.getIm()*c2.getIm();
+        return round(Math.sqrt(scale),15);
+	}
+
+	public boolean isUnitVector()
+	{
+		return this.length() == 1.0;
+	}
+	
+	public Complex getC1() {
+		return c1;
+	}
+
+	public void setC1(Complex c1) {
+		this.c1 = c1;
+	}
+
+	public Complex getC2() {
+		return c2;
+	}
+
+	public void setC2(Complex c2) {
+		this.c2 = c2;
+	}
+	
+	public static double round(double value, int decimalPlace)
+    {
+      double power_of_ten = 1;
+      double fudge_factor = 0.05;
+      while (decimalPlace-- > 0) {
+         power_of_ten *= 10.0d;
+         fudge_factor /= 10.0d;
+      }
+      return Math.round((value + fudge_factor)* power_of_ten)  / power_of_ten;
+    }
+}

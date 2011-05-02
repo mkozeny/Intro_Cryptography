@@ -115,7 +115,7 @@ public class MultiThread extends Thread{
 			    System.exit(1);
 			}
 			
-			receiveFile("/home/kozenym/Desktop/output", input, output);
+			receiveFile("/home/kozenym/Desktop/key_1.txt", input, output);
 			
 
 		
@@ -149,36 +149,30 @@ public class MultiThread extends Thread{
 				System.out.println("ACK sent");
 				
 				filename = input.readUTF();  
-				System.out.println("Filename is: "+filename);
+				System.out.println("Filename is: "+username);
 				
 				output.writeUTF("ACK");
 				System.out.println("ACK sent");
 				
-			    /*output.writeUTF("RECEIVE");   // RECEIVE command,
+			    output.writeUTF("RECEIVE");   // RECEIVE command,
 			    //output.writeUTF(receive);     // ...filename to server
 			    ack = input.readUTF();        // get server response
 			    if (! ack.equals("SEND")) {
 				System.out.println("Server didn't acknowledge receive attempt.  Aborted.");
 			    }
-			    else {*/
+			    else {
 				// get size of file from server
 				int togo = input.readInt();
-				System.out.println("Filesize sent: "+togo);
-				
-				output.writeUTF("ACK");
-				System.out.println("ACK sent");
 
 				// receive file contents
-				File file = new File(receive+"/"+username+"/"+filename);
+				File file = new File(receive);
 				DataOutputStream filestream = new DataOutputStream(new FileOutputStream(file));
 
 				sendInChunks(input, filestream, togo, 1024);
 				filestream.close();
-				System.out.println("File received.");
-				
 				output.writeUTF("ACK");   // SEND command,
-				
-			    //}
+				System.out.println("File received.");
+			    }
 			}
 			catch (Exception e) {
 			    System.err.println("File receive failed.");

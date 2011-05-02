@@ -411,7 +411,7 @@ public class Main {
 		    //output.writeUTF(send);     // ...filename to server
 		    
 		    ack = input.readUTF();     // get server response
-		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge filename.  Aborted.");
+		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge username.  Aborted.");
 		    
 		    else
 		    	System.out.println("ACK received");
@@ -433,11 +433,11 @@ public class Main {
 			output.writeInt(togo);
 			System.out.println("Size of file: "+togo+" sent");
 
-			ack = input.readUTF();     // get server response
-		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge file size.  Aborted.");
+			/*ack = input.readUTF();     // get server response
+		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge username.  Aborted.");
 		    
 		    else
-		    	System.out.println("ACK received");
+		    	System.out.println("ACK received");*/
 			// transfer file contents
 
 		    

@@ -115,7 +115,7 @@ public class MultiThread extends Thread{
 			    System.exit(1);
 			}
 			
-			receiveFile("/home/kozenym/Desktop/output", input, output);
+			receiveFile("/home/kozenym/Desktop/key_1.txt", input, output);
 			
 
 		
@@ -163,21 +163,15 @@ public class MultiThread extends Thread{
 			    else {*/
 				// get size of file from server
 				int togo = input.readInt();
-				System.out.println("Filesize sent: "+togo);
-				
-				output.writeUTF("ACK");
-				System.out.println("ACK sent");
 
 				// receive file contents
-				File file = new File(receive+"/"+username+"/"+filename);
+				File file = new File(receive);
 				DataOutputStream filestream = new DataOutputStream(new FileOutputStream(file));
 
 				sendInChunks(input, filestream, togo, 1024);
 				filestream.close();
-				System.out.println("File received.");
-				
 				output.writeUTF("ACK");   // SEND command,
-				
+				System.out.println("File received.");
 			    //}
 			}
 			catch (Exception e) {

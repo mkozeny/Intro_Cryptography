@@ -1,3 +1,3 @@
-#Thu Apr 14 15:38:07 CDT 2011
-prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions>\n<expression enabled\="true" text\="scale"/>\n<expression enabled\="true" text\="this.innerProduct(operand).timesItself()"/>\n</watchExpressions>\n
+#Fri Apr 29 21:13:19 CDT 2011
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions/>\n
 eclipse.preferences.version=1

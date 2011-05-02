@@ -1,0 +1,61 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+public class MultiThread extends Thread{
+	
+	private Socket socket;
+	
+	public void communication(Socket socket){
+		
+		this.socket= socket;
+		this.start();
+	}
+	
+	
+	 @Override
+     public void run()
+	{
+		
+		java.io.InputStream in;
+		try {
+			in = socket.getInputStream();
+	
+		BufferedReader inFromClient =new BufferedReader(new InputStreamReader(in));
+		DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
+
+		
+		String requestLine = inFromClient.readLine();
+		
+		System.out.println(requestLine);
+		
+		outToClient.writeBytes("ahoj kliente\r\n");
+		
+		FileOutputStream fos = new FileOutputStream(new File("/home/kozenym/Desktop/key_1.txt"));
+		
+		byte [] buffer = new byte[1024];		
+		int read = 0;	
+        while( (read = in.read(buffer)) != -1){
+        	
+        	fos.write(buffer, 0, read);
+        }
+        System.out.println("soubor zapsan");
+        fos.close();
+        inFromClient.close();
+        outToClient.close();
+        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}

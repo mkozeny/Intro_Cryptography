@@ -1,0 +1,93 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+public class MultiThread extends Thread{
+	
+	private Socket socket;
+	
+	public void communication(Socket socket){
+		
+		this.socket= socket;
+		this.start();
+	}
+	
+	
+	 @Override
+     public void run()
+	{
+		
+		java.io.InputStream in;
+		try {
+			in = socket.getInputStream();
+	
+		BufferedReader inFromClient =new BufferedReader(new InputStreamReader(in));
+		DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
+
+		
+		//get filename
+		String fileName = inFromClient.readLine();
+		System.out.println("Filename: "+fileName);
+		
+		
+		//sending ACK
+		outToClient.writeBytes("ACK\r\n");
+		
+		
+		FileOutputStream fos = new FileOutputStream(new File("/home/kozenym/Desktop/key_1.txt"));
+		
+		byte [] buffer = new byte[1024];		
+		int read = 0;	
+        while( (read = in.read(buffer)) != -1){
+        	
+        	fos.write(buffer, 0, read);
+        }
+        System.out.println("File received");
+        
+        outToClient.close();
+        outToClient = new DataOutputStream(socket.getOutputStream());
+        //sending ACK
+		outToClient.writeBytes("ACK\r\n");
+		
+		/*//get encryptedHash
+		String encryptedHash = inFromClient.readLine();
+		//getKey();
+		//String hash = RSAEncryptUtil.decrypt(encryptedHash, publicKey);
+		System.out.println("Received hash: "+encryptedHash);
+		
+		//sending ACK
+		outToClient.writeBytes("ACK\r\n");*/
+		
+        fos.close();
+        inFromClient.close();
+        outToClient.close();
+        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	 
+	 private String getReceivedText(InputStream in) throws IOException
+	 {
+		 char znak;
+		 StringBuffer fromServer = new StringBuffer();
+         while ((znak = (char)in.read()) != -1)
+             {
+                 fromServer.append(znak);
+                 if (fromServer.toString().endsWith("\r\n"))
+                	 break;
+                 
+             }
+         return fromServer.toString();
+	 }
+}

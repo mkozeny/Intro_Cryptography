@@ -1,0 +1,8 @@
+package main;
+
+public class NotMultithread {
+	public static void communication(Socket socket){
+		
+	}
+
+}

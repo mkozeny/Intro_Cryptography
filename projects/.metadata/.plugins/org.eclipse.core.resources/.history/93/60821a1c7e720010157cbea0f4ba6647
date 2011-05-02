@@ -1,0 +1,98 @@
+package main;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
+
+import rsa.RSAEncryptUtil;
+
+public class Main {
+
+	/**
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws Exception {
+		String text = "Hi Nino";
+		
+		
+		KeyPairGenerator keyGen =
+		    KeyPairGenerator.getInstance("RSA");
+		SecureRandom random =
+		    SecureRandom.getInstance("SHA1PRNG", "SUN");
+		keyGen.initialize(1024, random);
+		KeyPair pair = keyGen.generateKeyPair();
+		PrivateKey priv = pair.getPrivate();
+		PublicKey pub = pair.getPublic();
+
+		ObjectOutputStream oos =
+			new ObjectOutputStream(
+			new FileOutputStream( "pub.txt" ) );
+			oos.writeObject( pub );
+			oos.close();
+
+		
+			oos =
+				new ObjectOutputStream(
+				new FileOutputStream( "priv.txt" ) );
+				oos.writeObject( priv );
+				oos.close();	
+			
+			ObjectInputStream ois =
+			new ObjectInputStream(
+			new FileInputStream( "pub.txt" ) );
+			PublicKey desPub = (PublicKey) ois.readObject();
+			ois.close();
+
+				ois =
+					new ObjectInputStream(
+					new FileInputStream( "priv.txt" ) );
+					PrivateKey desPriv = (PrivateKey) ois.readObject();
+					ois.close();
+		
+					
+					
+					
+		String encryptedText = RSAEncryptUtil.encrypt(text, desPub);
+		System.out.println(encryptedText);
+		String decryptedText = RSAEncryptUtil.decrypt(encryptedText, desPriv);
+		System.out.println(decryptedText);
+		
+		
+		
+		//testing socket
+		ois =
+			new ObjectInputStream(
+			new FileInputStream( "key.txt" ) );
+			
+			
+		Socket socket = new Socket("localhost", 16789);
+		DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
+		byte [] array = null; 
+		ois.readFully(array);
+		//ByteArrayInputStream baos = new ByteArrayInputStream(ois.); 
+		outToClient.write(array);
+		
+		ois.close();
+		socket.close();
+	}
+
+}

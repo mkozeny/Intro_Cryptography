@@ -1,0 +1,55 @@
+package main;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
+
+import rsa.RSAEncryptUtil;
+
+public class Main {
+
+	/**
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		String text = "Hi Nino";
+		
+		
+		KeyPairGenerator keyGen =
+		    KeyPairGenerator.getInstance("RSA");
+		SecureRandom random =
+		    SecureRandom.getInstance("SHA1PRNG", "SUN");
+		keyGen.initialize(1024, random);
+		KeyPair pair = keyGen.generateKeyPair();
+		PrivateKey priv = pair.getPrivate();
+		PublicKey pub = pair.getPublic();
+
+
+		
+		
+		
+		/*FileInputStream keyfis = new FileInputStream("key.txt");
+		byte[] encKey = new byte[keyfis.available()];
+		
+		//String key = "abcd";
+		X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(encKey);
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+		PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);*/
+
+		System.out.println(RSAEncryptUtil.encrypt(text, pub));
+		//PublicKey publicKey = KeyBui
+	}
+
+}

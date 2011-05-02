@@ -1,0 +1,178 @@
+package main;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.util.StringTokenizer;
+
+import rsa.RSAEncryptUtil;
+
+public class Main {
+
+	/**
+	 * @param args
+	 * @throws Exception
+	 * 
+	 */
+	private static PublicKey publicKey;
+
+	private static PrivateKey privateKey;
+
+	private static BufferedReader inFromServer;
+	
+	private static DataOutputStream outToServer;
+	
+	private final static String publicKeyFileName = "/home/kozenym/Desktop/pubKey.txt";
+	
+	private final static String privateKeyFileName = "/home/kozenym/Desktop/privKey.txt";
+
+	public static void main(String[] args) throws Exception {
+		Socket socket = null;
+		try
+		{
+			// communication
+			socket = new Socket("localhost", 16789);
+			outToServer = new DataOutputStream(socket
+					.getOutputStream());
+			inFromServer = new BufferedReader(new InputStreamReader(socket
+					.getInputStream()));
+			File sendingFile = new File("/home/kozenym/Desktop/key.txt");
+			byte[] fileContent = getBytesFromFile(sendingFile);
+			String hash = "74832huhr32ry92";
+			
+			// sending filename
+			System.out.println("Sending file name: "+sendingFile.getName());
+			outToServer.writeBytes(sendingFile.getName()+"\r\n");
+	
+			// waiting for ack
+			waitingForACK();
+			System.out.println("Received ACK for sending file name");
+	
+			/*// sending file content
+			System.out.println("Sending content for file: "+sendingFile.getName());
+			outToServer.write(fileContent);
+	
+			// waiting for ack
+			waitingForACK();
+			System.out.println("Received ACK for sending file content");*/
+	
+			// sending hash
+			System.out.println("Sending hash: "+hash);
+			getKeys();
+			String encryptedHash = RSAEncryptUtil.encrypt(hash, privateKey);
+			System.out.println("Sending encrypted hash: "+encryptedHash);
+			outToServer.writeBytes(encryptedHash+"\r\n");
+	
+			// waiting for ack
+			waitingForACK();
+			System.out.println("Received ACK for sending hash");
+			
+			inFromServer.close();
+			outToServer.close();
+			socket.close();
+		}catch(Exception e)
+		{
+			System.err.println("Socket error");
+			e.printStackTrace();
+			inFromServer.close();
+			outToServer.close();
+			socket.close();
+		}
+	}
+
+	public static byte[] getBytesFromFile(File file) throws IOException {
+		InputStream is = new FileInputStream(file);
+
+		// Get the size of the file
+		long length = file.length();
+
+		// You cannot create an array using a long type.
+		// It needs to be an int type.
+		// Before converting to an int type, check
+		// to ensure that file is not larger than Integer.MAX_VALUE.
+		if (length > Integer.MAX_VALUE) {
+			// File is too large
+		}
+
+		// Create the byte array to hold the data
+		byte[] bytes = new byte[(int) length];
+
+		// Read in the bytes
+		int offset = 0;
+		int numRead = 0;
+		while (offset < bytes.length
+				&& (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+			offset += numRead;
+		}
+
+		// Ensure all the bytes have been read in
+		if (offset < bytes.length) {
+			throw new IOException("Could not completely read file "
+					+ file.getName());
+		}
+
+		// Close the input stream and return bytes
+		is.close();
+		return bytes;
+	}
+
+	public static boolean parseReply(String reply, String comparedString) {
+		StringTokenizer tokenizer = new StringTokenizer(reply, " ");
+		if (tokenizer.nextToken().equals(comparedString))
+			return true;
+		return false;
+	}
+
+	public static void waitingForACK() throws Exception {
+		String responseLine = inFromServer.readLine();
+		if (!parseReply(responseLine, "ACK"))
+			throw new Exception("ACK awaited");
+	}
+
+	public static void generateKey() throws NoSuchAlgorithmException,
+			NoSuchProviderException, FileNotFoundException, IOException {
+		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+		SecureRandom random = SecureRandom.getInstance("SHA1PRNG", "SUN");
+		keyGen.initialize(1024, random);
+		KeyPair pair = keyGen.generateKeyPair();
+		PrivateKey priv = pair.getPrivate();
+		PublicKey pub = pair.getPublic();
+
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(
+				publicKeyFileName));
+		oos.writeObject(pub);
+		oos.close();
+
+		oos = new ObjectOutputStream(new FileOutputStream(privateKeyFileName));
+		oos.writeObject(priv);
+		oos.close();
+	}
+
+	public static void getKeys() throws FileNotFoundException, IOException,
+			ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
+				publicKeyFileName));
+		publicKey = (PublicKey) ois.readObject();
+		ois.close();
+
+		ois = new ObjectInputStream(new FileInputStream(privateKeyFileName));
+		privateKey = (PrivateKey) ois.readObject();
+		ois.close();
+	}
+}

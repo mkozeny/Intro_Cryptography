@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/projects/ElectronicSignatureServer/lib/bouncycastle.jar" key="org.eclipse.jdt.ui.lastuserlibrary"/>
+	<item value="560,578" key="UserLibraryLoadSaveDialog.size"/>
 	<section name="OptionalMessageDialog.hide.">
+		<item value="false" key="RunnableJar.export.ipwarning"/>
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
 	<section name="SourceActionDialog.constructors">
@@ -8,6 +11,41 @@
 		<item value="1" key="VisibilityModifier"/>
 		<item value="false" key="SynchronizedModifier"/>
 		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
+	</section>
+	<section name="GenerateConstructorUsingFieldsSelectionDialog">
+		<item value="false" key="OmitCallToSuper"/>
+	</section>
+	<section name="RefactoringWizard.preview">
+		<item value="400" key="height"/>
+		<item value="600" key="width"/>
+	</section>
+	<section name="FatJarPackageWizard">
+		<item value="/home/kozenym/Desktop/Client.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="Main (4) - ElectronicSignatureClient" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/home/kozenym/Desktop/Client.jar"/>
+			<item value="/home/kozenym/Desktop/Server.jar"/>
+			<item value="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/HW/2/GF256.jar"/>
+			<item value="/home/kozenym/Desktop/HillCipher.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value=".xml"/>
+		</list>
+	</section>
+	<section name="SourceActionDialog.methods">
+		<item value="1" key="VisibilityModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item value="11" key="index"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="true" key="group_libraries"/>
@@ -20,27 +58,6 @@
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
-	<section name="GenerateConstructorUsingFieldsSelectionDialog">
-		<item value="false" key="OmitCallToSuper"/>
-	</section>
-	<section name="RefactoringWizard.preview">
-		<item value="400" key="height"/>
-		<item value="600" key="width"/>
-	</section>
-	<section name="FatJarPackageWizard">
-		<item value="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/HW/2/GF256.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
-		<item value="Main (1) - GF256" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
-		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
-		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="/home/kozenym/Desktop/UNO/school/Intro_Cryptography/HW/2/GF256.jar"/>
-			<item value="/home/kozenym/Desktop/HillCipher.jar"/>
-		</list>
-		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
-			<item value=".xml"/>
-		</list>
-	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="*" key="patterns"/>
 		<item value="false" key="updateQualifiedNames"/>
@@ -49,12 +66,6 @@
 		<item value="false" key="updateSimilarElements"/>
 	</section>
 	<section name="RenameInformationPopup">
-	</section>
-	<section name="SourceActionDialog.methods">
-		<item value="1" key="VisibilityModifier"/>
-		<item value="false" key="Comments"/>
-		<item value="false" key="SynchronizedModifier"/>
-		<item value="false" key="FinalModifier"/>
 	</section>
 	<section name="AddGetterSetterDialog">
 		<item value="false" key="RemoveFinal"/>

@@ -48,7 +48,7 @@ public class MultiThread extends Thread {
 
 	}
 
-	private static void receiveFile(String receive, DataInputStream input,
+	static private void receiveFile(String receive, DataInputStream input,
 			DataOutputStream output) {
 
 		// response from server (ACK/NACK)
@@ -100,7 +100,7 @@ public class MultiThread extends Thread {
 		}
 	}
 
-	private static void sendInChunks(DataInputStream input,
+	static public void sendInChunks(DataInputStream input,
 			DataOutputStream output, int togo, int chunksize)
 			throws IOException {
 

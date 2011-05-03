@@ -21,6 +21,7 @@ public class Main {
             while(true)
             {
             	Socket connectionSocket = listenSocket.accept();
+    			
     			MultiThread mult = new MultiThread();
     			mult.communication(connectionSocket);
                 

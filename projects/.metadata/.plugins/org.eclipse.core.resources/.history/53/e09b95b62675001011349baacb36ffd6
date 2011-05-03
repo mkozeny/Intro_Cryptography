@@ -1,5 +1,8 @@
 package main;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -8,8 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyPair;
@@ -19,6 +24,7 @@ import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
+import java.util.StringTokenizer;
 
 import rsa.RSAEncryptUtil;
 
@@ -34,37 +40,41 @@ public class Main {
 	private static PrivateKey privateKey;
 
 	private static DataInputStream input;
-
+	
 	private static DataOutputStream output;
-
+	
 	private final static String publicKeyFileName = "/home/kozenym/Desktop/pubKey.txt";
-
+	
 	private final static String privateKeyFileName = "/home/kozenym/Desktop/privKey.txt";
-
+	
 	public static void main(String[] args) throws Exception {
 		doCommunication();
 	}
 
 	public static void doCommunication() throws Exception {
-
+		
 		Socket socket = null;
 		input = null;
 		output = null;
 		try {
 			socket = new Socket("localhost", 16789);
-			input = new DataInputStream(socket.getInputStream());
-			output = new DataOutputStream(socket.getOutputStream());
-		} catch (UnknownHostException e) {
-			System.out.println("No server found on the specified host.");
-			System.exit(1);
-		} catch (IOException e) {
-			System.err.println("No server is listening on the specified port.");
-			System.exit(1);
+		    input = new DataInputStream(socket.getInputStream());
+		    output = new DataOutputStream(socket.getOutputStream());
 		}
-
+		catch(UnknownHostException e) {
+		    System.out.println("No server found on the specified host.");
+		    System.exit(1);
+		}
+		catch(IOException e) {
+		    System.err.println("No server is listening on the specified port.");
+		    System.exit(1);
+		}
+		
 		// get filename to send if this is a send
 
 		sendFile("/home/kozenym/Desktop/key.txt", input, output);
+		   
+		
 
 	}
 
@@ -104,6 +114,9 @@ public class Main {
 		return bytes;
 	}
 
+	
+	
+
 	private static void generateKey() throws NoSuchAlgorithmException,
 			NoSuchProviderException, FileNotFoundException, IOException {
 		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
@@ -134,56 +147,57 @@ public class Main {
 		privateKey = (PrivateKey) ois.readObject();
 		ois.close();
 	}
+	
+	
+	
+	static private void sendFile(String send, DataInputStream input, DataOutputStream output) {
 
-	static private void sendFile(String send, DataInputStream input,
-			DataOutputStream output) {
-
-		String ack = null;
+		String ack=null;
 		String hash = "74832huhr32ry92";// response from server (ACK/NACK)
-		String encryptedHash = null;
+		String encryptedHash = null;	
 		System.out.println("Preparing to transfer file " + send + "...");
 
 		try {
-			output.writeUTF("username"); // SEND command,
+			output.writeUTF("username");   // SEND command,
 			System.out.println("Username sent");
-
-			ack = input.readUTF(); // get server response
-			if (!ack.equals("ACK")) {
-				System.out
-						.println("Server didn't acknowledge username.  Aborted.");
-			} else
-				System.out.println("ACK received");
-
-			File file = new File(send);
-			DataInputStream filestream = new DataInputStream(
-					new FileInputStream(file));
+			
+			ack = input.readUTF();     // get server response
+		    if (! ack.equals("ACK")) {
+		    	System.out.println("Server didn't acknowledge username.  Aborted.");
+		    }
+		    else
+		    	System.out.println("ACK received");
+			
+		    File file = new File(send);
+			DataInputStream filestream=new DataInputStream(new FileInputStream(file));
 			int togo = getBytesFromFile(file).length;
-
-			output.writeUTF(file.getName()); // SEND command,
-			System.out.println("Filename sent");
-			// output.writeUTF(send); // ...filename to server
-
-			ack = input.readUTF(); // get server response
-			if (!ack.equals("ACK"))
-				System.out
-						.println("Server didn't acknowledge filename.  Aborted.");
-
-			else
-				System.out.println("ACK received");
-
-			// push length of file to server
+			
+		    
+		    output.writeUTF(file.getName());   // SEND command,
+		    System.out.println("Filename sent");
+		    //output.writeUTF(send);     // ...filename to server
+		    
+		    ack = input.readUTF();     // get server response
+		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge filename.  Aborted.");
+		    
+		    else
+		    	System.out.println("ACK received");
+			
+			
+			
+			
+		   // push length of file to server
 			output.writeInt(togo);
-			System.out.println("Size of file: " + togo + " sent");
+			System.out.println("Size of file: "+togo+" sent");
 
-			ack = input.readUTF(); // get server response
-			if (!ack.equals("ACK"))
-				System.out
-						.println("Server didn't acknowledge file size.  Aborted.");
-
-			else
-				System.out.println("ACK received");
+			ack = input.readUTF();     // get server response
+		    if (! ack.equals("ACK"))System.out.println("Server didn't acknowledge file size.  Aborted.");
+		    
+		    else
+		    	System.out.println("ACK received");
 			// transfer file contents
 
+		    
 			sendInChunks(filestream, output, togo, 1024);
 			filestream.close();
 			System.out.println("File content sent");
@@ -191,43 +205,41 @@ public class Main {
 			// is the server happy with the transfer?
 
 			ack = input.readUTF();
-			if (!ack.equals("ACK"))
+			if (! ack.equals("ACK"))
 				System.out.println("Server failed to store the file.");
 			else
 				System.out.println("ACK received");
-
+			
 			getKeys();
 			encryptedHash = RSAEncryptUtil.encrypt(hash, privateKey);
 			output.writeUTF(encryptedHash);
-			System.out.println("Encrypted hash: " + encryptedHash + " sent");
-
+			System.out.println("Encrypted hash: "+encryptedHash+" sent");
+			
 			ack = input.readUTF();
-			if (!ack.equals("ACK"))
+			if (! ack.equals("ACK"))
 				System.out.println("Failed to send hash.");
 			else
 				System.out.println("ACK received");
-
-			// }
-		} catch (Exception e) {
-			System.out.println("Server failed to store the file.");
+			
+		    //} 
 		}
-	}
-
-	static public void sendInChunks(DataInputStream input,
-			DataOutputStream output, int togo, int chunksize)
-			throws IOException {
-
+		catch (Exception e) {
+		    System.out.println("Server failed to store the file.");
+		}
+	    }
+	static public void sendInChunks(DataInputStream input, DataOutputStream output, int togo, int chunksize) throws IOException {
+		
 		// copy bytes from input to output in chunksize-sized chunks
 
 		byte bytes[] = new byte[chunksize];
 		int writecount;
 		while (togo > 0) {
-			writecount = (togo >= chunksize ? chunksize : togo);
-			input.read(bytes, 0, writecount);
-			output.write(bytes, 0, writecount);
-			togo = togo - writecount;
+		    writecount = (togo >= chunksize ? chunksize : togo);
+		    input.read(bytes, 0, writecount);
+		    output.write(bytes, 0,  writecount);
+		    togo = togo - writecount;
 		}
-
+		
 		output.flush();
-	}
+	    }
 }

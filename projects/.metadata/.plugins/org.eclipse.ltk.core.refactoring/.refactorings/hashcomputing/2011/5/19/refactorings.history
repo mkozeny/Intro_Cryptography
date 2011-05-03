@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;hash.Main.copyByteArray(...)&apos; to &apos;concatenate&apos;&#x0A;- Original project: &apos;hashcomputing&apos;&#x0A;- Original element: &apos;hash.Main.copyByteArray(...)&apos;&#x0A;- Renamed element: &apos;hash.Main.concatenate(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;copyByteArray&apos;" flags="589826" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;hash{Main.java[Main~copyByteArray~\[B~\[B" name="concatenate" references="true" stamp="1304452071960" version="1.0"/>
+</session>

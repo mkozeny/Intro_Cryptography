@@ -1,0 +1,129 @@
+package main;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.security.PublicKey;
+
+import rsa.RSAEncryptUtil;
+
+public class MultiThread extends Thread {
+
+	private Socket socket;
+
+	private static PublicKey publicKey;
+
+	private final static String publicKeyFileName = "/home/kozenym/Desktop/pubKey.txt";
+
+	public void communication(Socket socket) {
+
+		this.socket = socket;
+		this.start();
+	}
+
+	@Override
+	public void run() {
+		DataInputStream input = null;
+		DataOutputStream output = null;
+
+		try {
+			input = new DataInputStream(socket.getInputStream());
+			output = new DataOutputStream(socket.getOutputStream());
+		} catch (UnknownHostException e) {
+			System.out.println("No server found on the specified host.");
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("No server is listening on the specified port.");
+			System.exit(1);
+		}
+
+		receiveFile("/home/kozenym/Desktop/output", input, output);
+
+	}
+
+	private static void receiveFile(String receive, DataInputStream input,
+			DataOutputStream output) {
+
+		// response from server (ACK/NACK)
+		String username = null;
+		String filename = null;
+		System.out.println("Preparing to receive file...");
+
+		try {
+			username = input.readUTF();
+			System.out.println("Username is: " + username);
+
+			output.writeUTF("ACK");
+			System.out.println("ACK sent");
+
+			filename = input.readUTF();
+			System.out.println("Filename is: " + filename);
+
+			output.writeUTF("ACK");
+			System.out.println("ACK sent");
+
+			int togo = input.readInt();
+			System.out.println("Filesize sent: " + togo);
+
+			output.writeUTF("ACK");
+			System.out.println("ACK sent");
+
+			// receive file contents
+			File file = new File(receive + "/" + username + "/" + filename);
+			DataOutputStream filestream = new DataOutputStream(
+					new FileOutputStream(file));
+
+			sendInChunks(input, filestream, togo, 1024);
+			filestream.close();
+			System.out.println("File received.");
+
+			output.writeUTF("ACK"); // SEND command,
+
+			// get encryptedHash
+			String encryptedHash = input.readUTF();
+			getKey();
+			String hash = RSAEncryptUtil.decrypt(encryptedHash, publicKey);
+			System.out.println("Received hash: " + hash);
+
+			// sending ACK
+			output.writeUTF("ACK");
+			// }
+		} catch (Exception e) {
+			System.err.println("File receive failed.");
+		}
+	}
+
+	private static void sendInChunks(DataInputStream input,
+			DataOutputStream output, int togo, int chunksize)
+			throws IOException {
+
+		// copy bytes from input to output in chunksize-sized chunks
+
+		byte bytes[] = new byte[chunksize];
+		int writecount;
+		while (togo > 0) {
+			writecount = (togo >= chunksize ? chunksize : togo);
+			input.read(bytes, 0, writecount);
+			output.write(bytes, 0, writecount);
+			togo = togo - writecount;
+		}
+
+		output.flush();
+	}
+
+	public static void getKey() throws FileNotFoundException, IOException,
+			ClassNotFoundException {
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
+				publicKeyFileName));
+		publicKey = (PublicKey) ois.readObject();
+		ois.close();
+
+	}
+}

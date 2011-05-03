@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 package(s) to &apos;ElectronicSignatureServer/src&apos;&#x0A;- Original project: &apos;ElectronicSignatureClient&apos;&#x0A;- Destination element: &apos;ElectronicSignatureServer/src&apos;&#x0A;- Original element: &apos;ElectronicSignatureClient/src/hash&apos;" description="Copy package" destination="=ElectronicSignatureServer/src" element1="/src&lt;hash" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1304457420404" version="1.0"/>
+</session>

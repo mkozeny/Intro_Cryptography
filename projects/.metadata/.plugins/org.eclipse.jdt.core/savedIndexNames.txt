@@ -1,24 +1,16 @@
 INDEX VERSION 1.126+/home/kozenym/Desktop/UNO/school/Intro_Cryptography/git/projects/.metadata/.plugins/org.eclipse.jdt.core
 4001217184.index
-2370678678.index
-3135680522.index
-274907012.index
 1508963113.index
 3888690317.index
+1058789712.index
 1586032955.index
-47599848.index
 939992464.index
 530196295.index
 2963989963.index
 667902377.index
-837158796.index
 1611951834.index
 138053197.index
-1594113350.index
 1421691488.index
 1052979633.index
-3865754283.index
-2587115027.index
-1820894104.index
-3955261179.index
+200083680.index
 1302141259.index

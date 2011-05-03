@@ -1,5 +1,7 @@
 package main;
 
+import hash.HashGenerator;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -40,6 +42,8 @@ public class Main {
 	private final static String publicKeyFileName = "/home/kozenym/Desktop/pubKey.txt";
 
 	private final static String privateKeyFileName = "/home/kozenym/Desktop/privKey.txt";
+	
+	
 
 	public static void main(String[] args) throws Exception {
 		doCommunication();
@@ -64,7 +68,7 @@ public class Main {
 
 		// get filename to send if this is a send
 
-		sendFile("/home/kozenym/Desktop/key.txt", input, output);
+		sendFile("/home/kozenym/Desktop/hash-files/Main.java", input, output);
 
 	}
 
@@ -139,7 +143,8 @@ public class Main {
 			DataOutputStream output) {
 
 		String ack = null;
-		String hash = "74832huhr32ry92";// response from server (ACK/NACK)
+		//String hash = "74832huhr32ry92";// response from server (ACK/NACK)
+		String hash = "";
 		String encryptedHash = null;
 		System.out.println("Preparing to transfer file " + send + "...");
 
@@ -157,7 +162,8 @@ public class Main {
 			File file = new File(send);
 			DataInputStream filestream = new DataInputStream(
 					new FileInputStream(file));
-			int togo = getBytesFromFile(file).length;
+			byte [] fileContent = getBytesFromFile(file);
+			int togo = fileContent.length;
 
 			output.writeUTF(file.getName()); // SEND command,
 			System.out.println("Filename sent");
@@ -197,6 +203,8 @@ public class Main {
 				System.out.println("ACK received");
 
 			getKeys();
+			hash = HashGenerator.computeHash(fileContent, file.getName().getBytes("UTF-8"));
+			System.out.println("Hash: " + hash);
 			encryptedHash = RSAEncryptUtil.encrypt(hash, privateKey);
 			output.writeUTF(encryptedHash);
 			System.out.println("Encrypted hash: " + encryptedHash + " sent");
@@ -230,4 +238,7 @@ public class Main {
 
 		output.flush();
 	}
+	
+
+
 }
